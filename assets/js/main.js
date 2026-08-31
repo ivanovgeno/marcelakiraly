@@ -38,6 +38,7 @@ if(toggle&&menu){
   });
   menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
   window.addEventListener('resize',()=>{if(window.innerWidth>820)closeMenu()});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape')closeMenu()});
 }
 
 const reveals=document.querySelectorAll('.reveal');
@@ -56,6 +57,7 @@ if(!reduceMotion&&'IntersectionObserver'in window){
 }
 
 if(!reduceMotion&&finePointer){
+  const transformable=['hero-photo-wrap','subhero-media','about-visual','method-art'];
   document.querySelectorAll('[data-tilt]').forEach(card=>{
     const strength=Number(card.dataset.tiltStrength||7);
     const onMove=event=>{
@@ -68,14 +70,14 @@ if(!reduceMotion&&finePointer){
       card.style.setProperty('--ry',`${ry}deg`);
       card.style.setProperty('--x',`${px*100}%`);
       card.style.setProperty('--y',`${py*100}%`);
-      if(card.classList.contains('hero-photo-wrap')||card.classList.contains('about-visual')||card.classList.contains('method-art')){
+      if(transformable.some(name=>card.classList.contains(name))){
         card.style.transform=`perspective(1200px) rotateX(${rx*.35}deg) rotateY(${ry*.35}deg)`;
       }
     };
     const reset=()=>{
       card.style.setProperty('--rx','0deg');
       card.style.setProperty('--ry','0deg');
-      if(card.classList.contains('hero-photo-wrap')||card.classList.contains('about-visual')||card.classList.contains('method-art')) card.style.transform='';
+      if(transformable.some(name=>card.classList.contains(name))) card.style.transform='';
     };
     card.addEventListener('pointermove',onMove);
     card.addEventListener('pointerleave',reset);
