@@ -6,6 +6,29 @@ if(!document.querySelector(`link[href="${typographyHref}"]`)){
   typography.href=typographyHref;
   document.head.appendChild(typography);
 }
+
+/* Dočasné fotografie. Po dodání reálných fotek Marcely se pouze vymění soubory v assets/images. */
+const heroPlaceholder=document.querySelector('.cosmos-silhouette');
+if(heroPlaceholder){
+  const image=document.createElement('img');
+  image.src='assets/images/hero-konstelace-temp.jpg';
+  image.alt='';
+  image.className='hero-temp-image';
+  image.loading='eager';
+  image.decoding='async';
+  heroPlaceholder.replaceWith(image);
+}
+const aboutPlaceholder=document.querySelector('.about-portrait-art');
+if(aboutPlaceholder){
+  const image=document.createElement('img');
+  image.src='assets/images/marcela-temp.jpg';
+  image.alt='Dočasný ilustrační portrét pro sekci O mně';
+  image.className='about-temp-image';
+  image.loading='lazy';
+  image.decoding='async';
+  aboutPlaceholder.replaceWith(image);
+}
+
 const header=document.querySelector('[data-header], .site-header');
 const toggle=document.querySelector('.menu-toggle');
 const menu=document.querySelector('.mobile-menu');
