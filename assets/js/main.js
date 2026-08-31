@@ -10,6 +10,24 @@ const ensureStylesheet=(href)=>{
 };
 ensureStylesheet('assets/css/typography-cs.css');
 ensureStylesheet('assets/css/constellation-2026.css');
+ensureStylesheet('assets/css/centered-2026.css');
+
+/*
+ * Robust image loading.
+ * The site can be previewed from GitHub Pages, a custom domain or another path.
+ * Absolute raw GitHub URLs prevent relative /assets paths from breaking.
+ */
+const IMAGE_BASE='https://raw.githubusercontent.com/ivanovgeno/marcelakiraly/main/assets/images/';
+document.querySelectorAll('img[src^="assets/images/"]').forEach(img=>{
+  const original=img.getAttribute('src');
+  const filename=original.split('/').pop();
+  img.src=IMAGE_BASE+encodeURIComponent(filename);
+  img.addEventListener('error',()=>{
+    if(img.dataset.imageFallback) return;
+    img.dataset.imageFallback='true';
+    img.src=IMAGE_BASE+'hero-konstelace-temp.jpg';
+  },{once:true});
+});
 
 const header=document.querySelector('[data-header], .site-header');
 const toggle=document.querySelector('.menu-toggle');
