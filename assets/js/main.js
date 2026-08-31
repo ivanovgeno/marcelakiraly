@@ -10,6 +10,7 @@ const ensureStylesheet=(href)=>{
 };
 ensureStylesheet('assets/css/typography-cs.css');
 ensureStylesheet('assets/css/media-temp.css');
+ensureStylesheet('assets/css/constellation-2026.css');
 
 const header=document.querySelector('[data-header], .site-header');
 const toggle=document.querySelector('.menu-toggle');

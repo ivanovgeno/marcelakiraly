@@ -1,0 +1,215 @@
+/* Marcela Kiraly — constellation visual layer 2026 */
+:root{
+  --c26-plum:#60456f;
+  --c26-plum-deep:#432f4f;
+  --c26-gold:#c99552;
+  --c26-gold-soft:#ead3a1;
+  --c26-lilac:#c9b4d5;
+  --c26-blush:#f7eff2;
+  --c26-paper:#fffdfc;
+}
+
+/* HERO — true visual centering below the fixed header */
+.hero{
+  min-height:100svh !important;
+  padding-top:86px !important;
+  display:flex !important;
+  align-items:stretch !important;
+  background:
+    radial-gradient(circle at 82% 28%,rgba(255,247,234,.92),transparent 26%),
+    linear-gradient(118deg,#fffaf8 0%,#faf2f4 38%,#f0e3ed 69%,#e4d3e8 100%) !important;
+  isolation:isolate;
+}
+.hero:before{
+  content:'';
+  position:absolute;
+  inset:86px 0 0;
+  z-index:0;
+  opacity:.42;
+  pointer-events:none;
+  background-image:
+    radial-gradient(circle at 7% 31%,rgba(201,149,82,.95) 0 2px,transparent 3px),
+    radial-gradient(circle at 14% 22%,rgba(201,149,82,.75) 0 2px,transparent 3px),
+    radial-gradient(circle at 22% 36%,rgba(201,149,82,.7) 0 2px,transparent 3px),
+    linear-gradient(28deg,transparent 0 48.9%,rgba(201,149,82,.22) 49%,rgba(201,149,82,.22) 49.25%,transparent 49.35%),
+    linear-gradient(-20deg,transparent 0 55%,rgba(96,69,111,.12) 55.1%,rgba(96,69,111,.12) 55.28%,transparent 55.4%);
+  mask-image:linear-gradient(90deg,#000 0 32%,transparent 61%);
+}
+.hero .hero-grid{
+  min-height:calc(100svh - 86px) !important;
+  align-items:center !important;
+  padding-block:clamp(34px,5.5vh,72px) !important;
+  gap:clamp(42px,5vw,82px) !important;
+  margin-inline:auto !important;
+}
+.hero-copy{
+  padding:0 !important;
+  align-self:center;
+}
+.hero-copy h1{
+  max-width:720px;
+  font-size:clamp(4rem,7.2vw,7.8rem) !important;
+}
+.hero-copy .lead{margin-top:30px !important}
+.hero-photo-wrap{
+  position:relative;
+  align-self:center;
+  width:min(100%,590px);
+  margin-inline:auto;
+  transform-style:preserve-3d;
+  transition:transform .22s ease;
+}
+.hero-photo-frame{
+  position:relative;
+  aspect-ratio:4/5;
+  overflow:hidden;
+  border-radius:48% 48% 30px 30px;
+  border:1px solid rgba(201,149,82,.38);
+  background:#eadde9;
+  box-shadow:0 40px 100px rgba(75,50,85,.18),inset 0 1px rgba(255,255,255,.8);
+}
+.hero-photo-frame:before{
+  content:'';
+  position:absolute;
+  inset:6%;
+  z-index:2;
+  border:1px solid rgba(235,207,151,.72);
+  border-radius:50%;
+  box-shadow:0 0 0 30px rgba(201,149,82,.045),0 0 0 60px rgba(201,149,82,.025);
+  pointer-events:none;
+}
+.hero-photo-frame:after{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  background:linear-gradient(180deg,transparent 58%,rgba(65,44,72,.15) 100%);
+}
+.hero-photo{
+  width:100%;height:100%;object-fit:cover;object-position:center 48%;
+  display:block;
+  transition:transform .9s cubic-bezier(.2,.8,.2,1),filter .5s ease;
+}
+.hero-photo-wrap:hover .hero-photo{transform:scale(1.035);filter:saturate(1.04)}
+.hero-photo-orbit{
+  position:absolute;z-index:3;inset:10%;border-radius:50%;border:1px dashed rgba(229,194,126,.8);pointer-events:none;animation:c26Orbit 26s linear infinite;
+}
+.hero-photo-orbit:before,.hero-photo-orbit:after{
+  content:'';position:absolute;width:8px;height:8px;border-radius:50%;background:var(--c26-gold-soft);box-shadow:0 0 18px rgba(234,211,161,.9)
+}
+.hero-photo-orbit:before{left:8%;top:22%}.hero-photo-orbit:after{right:3%;bottom:29%}
+.hero-photo-note{
+  position:absolute;right:-24px;bottom:36px;z-index:4;padding:16px 19px;border-radius:18px;background:rgba(255,253,252,.86);border:1px solid rgba(255,255,255,.78);backdrop-filter:blur(18px);box-shadow:0 20px 55px rgba(71,47,81,.14)
+}
+.hero-photo-note span{display:block;font-size:.62rem;text-transform:uppercase;letter-spacing:.16em;color:var(--c26-gold)}
+.hero-photo-note strong{display:block;margin-top:4px;font-family:var(--serif);font-size:1.32rem;font-weight:500;color:var(--c26-plum)}
+
+/* Constellation language throughout the page */
+.audience,.process,.testimonials,.about-luxe,.visual-story{overflow:hidden;isolation:isolate}
+.audience:before,.process:before,.testimonials:before{
+  content:'';position:absolute;width:520px;height:520px;border:1px solid rgba(201,149,82,.15);border-radius:50%;pointer-events:none;z-index:-1
+}
+.audience:before{right:-270px;top:140px;box-shadow:0 0 0 55px rgba(201,149,82,.025),0 0 0 110px rgba(169,140,186,.025)}
+.process:before{left:-300px;bottom:20px;box-shadow:0 0 0 60px rgba(201,149,82,.025)}
+.testimonials:before{right:-310px;top:-110px;box-shadow:0 0 0 60px rgba(169,140,186,.028)}
+
+.lux-card .card-icon,.process-symbol{
+  position:relative;
+}
+.lux-card .card-icon:after,.process-symbol:after{
+  content:'';position:absolute;inset:-15px;border:1px dashed rgba(201,149,82,.35);border-radius:50%;transition:transform .7s var(--ease),border-color .35s ease
+}
+.lux-card:hover .card-icon:after,.process-item:hover .process-symbol:after{transform:rotate(35deg) scale(1.08);border-color:rgba(201,149,82,.75)}
+.process-item{position:relative;overflow:hidden}
+.process-item:after{
+  content:'';position:absolute;right:-50px;top:50%;width:140px;height:1px;background:linear-gradient(90deg,rgba(201,149,82,.05),rgba(201,149,82,.52),transparent);transform:rotate(-18deg);pointer-events:none
+}
+
+/* Visual story section — multiple imagery moments */
+.visual-story{
+  padding:124px 0;
+  position:relative;
+  background:
+    radial-gradient(circle at 8% 75%,rgba(201,180,213,.26),transparent 25%),
+    linear-gradient(180deg,#fffdfc,#faf2f5);
+}
+.visual-story:before{
+  content:'';position:absolute;inset:0;pointer-events:none;opacity:.34;
+  background:url('../images/constellation-bg.webp') center/cover no-repeat;
+  mask-image:linear-gradient(90deg,transparent 0,#000 18%,#000 82%,transparent 100%);
+}
+.story-layout{position:relative;z-index:2;display:grid;grid-template-columns:.72fr 1.28fr;gap:72px;align-items:center}
+.story-copy{max-width:500px}
+.story-copy h2{font-size:clamp(3.3rem,5.1vw,5.7rem)!important}
+.constellation-legend{margin-top:34px;padding-top:22px;border-top:1px solid rgba(96,69,111,.13);display:grid;gap:12px}
+.constellation-legend span{display:flex;align-items:center;gap:12px;color:#6f6273;font-size:.82rem}
+.constellation-legend i{width:9px;height:9px;border-radius:50%;background:var(--c26-gold);box-shadow:0 0 0 7px rgba(201,149,82,.10);flex:0 0 auto}
+.story-media-grid{display:grid;grid-template-columns:1.12fr .88fr;grid-template-rows:1fr 1fr;gap:16px;perspective:1200px}
+.image-story-card{position:relative;min-height:270px;border-radius:26px;overflow:hidden;background:#eadce9;border:1px solid rgba(255,255,255,.75);box-shadow:0 22px 65px rgba(70,47,80,.12);transform:translateZ(0);transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.image-story-card:first-child{grid-row:1/3;min-height:580px}
+.image-story-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s var(--ease),filter .5s ease}
+.image-story-card:hover{transform:translateY(-8px);box-shadow:0 34px 85px rgba(70,47,80,.18)}
+.image-story-card:hover img{transform:scale(1.045)}
+.image-story-card:before{content:'';position:absolute;z-index:2;inset:15px;border:1px solid rgba(234,211,161,.52);border-radius:19px;pointer-events:none}
+.image-story-card:after{content:'';position:absolute;z-index:2;inset:0;background:linear-gradient(180deg,transparent 52%,rgba(56,38,63,.58) 100%);pointer-events:none}
+.image-story-card figcaption{position:absolute;z-index:3;left:28px;right:28px;bottom:24px;color:#fff;font-family:var(--serif);font-size:1.7rem;line-height:1.05;text-shadow:0 2px 20px rgba(40,27,46,.32)}
+.image-story-card figcaption small{display:block;margin-top:7px;font-family:var(--sans);font-size:.67rem;letter-spacing:.13em;text-transform:uppercase;color:#f2d9aa}
+
+/* Image rail turns the motif into a recognizable brand system */
+.constellation-rail{padding:0 0 110px;background:#faf2f5;overflow:hidden}
+.constellation-rail-inner{display:grid;grid-template-columns:1.08fr .78fr 1.08fr .78fr;gap:12px}
+.rail-shot{position:relative;height:210px;overflow:hidden;border-radius:20px;border:1px solid rgba(96,69,111,.10);box-shadow:0 14px 40px rgba(78,53,88,.08)}
+.rail-shot:nth-child(even){height:178px;align-self:center}
+.rail-shot img{width:100%;height:100%;object-fit:cover;transition:transform .65s var(--ease)}
+.rail-shot:hover img{transform:scale(1.06)}
+.rail-shot:after{content:'✦';position:absolute;right:13px;top:10px;color:#f1d39a;text-shadow:0 0 12px rgba(241,211,154,.85)}
+
+/* About image upgraded */
+.about-photo-static{position:absolute;inset:6%;overflow:hidden;border-radius:38% 38% 28px 28px;box-shadow:0 30px 75px rgba(76,52,86,.15)}
+.about-static-photo{width:100%;height:100%;object-fit:cover;object-position:center 45%;transition:transform .8s var(--ease)}
+.about-visual:hover .about-static-photo{transform:scale(1.035)}
+.about-orbit{border-color:rgba(201,149,82,.48)!important}
+
+/* CTA and subpages share the constellation universe */
+.cta-band{
+  background:
+    linear-gradient(90deg,rgba(76,52,89,.92),rgba(112,75,122,.80)),
+    url('../images/constellation-bg.webp') center/cover no-repeat !important;
+}
+.cta-band:after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 12% 50%,rgba(234,211,161,.28) 0 2px,transparent 3px),radial-gradient(circle at 88% 32%,rgba(234,211,161,.24) 0 2px,transparent 3px);background-size:180px 140px,220px 170px}
+.cta-inner{position:relative;z-index:2}
+
+.subhero{isolation:isolate}
+.subhero:before{
+  background:
+    linear-gradient(90deg,rgba(253,249,247,.98) 0%,rgba(250,242,244,.94) 45%,rgba(242,230,239,.55) 72%,rgba(242,230,239,.20) 100%),
+    url('../images/constellation-bg.webp') right center/60% auto no-repeat !important;
+}
+.about-photo .portrait-arch,.visual-shell .portrait-arch{
+  background-image:url('../images/portrait-constellations.webp') !important;
+  background-size:cover!important;background-position:center!important;
+}
+
+@keyframes c26Orbit{to{transform:rotate(360deg)}}
+
+@media(max-width:1050px){
+  .hero .hero-grid{grid-template-columns:1fr 1fr!important;gap:28px!important}
+  .hero-photo-note{right:0}
+  .story-layout{grid-template-columns:1fr;gap:46px}.story-copy{max-width:760px}.story-media-grid{max-width:850px}
+}
+@media(max-width:820px){
+  .hero{min-height:auto!important;padding-top:78px!important}
+  .hero .hero-grid{grid-template-columns:1fr!important;min-height:auto!important;padding-block:48px 60px!important;text-align:left}
+  .hero-copy h1{font-size:clamp(3.5rem,14vw,5.6rem)!important}
+  .hero-photo-wrap{width:min(100%,520px)}
+  .hero-photo-note{right:12px;bottom:18px}
+  .story-media-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}.image-story-card:first-child{grid-column:1/-1;grid-row:auto;min-height:500px}.image-story-card{min-height:280px}
+  .constellation-rail-inner{grid-template-columns:1fr 1fr}.rail-shot,.rail-shot:nth-child(even){height:190px}
+}
+@media(max-width:560px){
+  .story-media-grid{grid-template-columns:1fr}.image-story-card:first-child{grid-column:auto;min-height:430px}.image-story-card{min-height:320px}
+  .constellation-rail-inner{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}.rail-shot,.rail-shot:nth-child(even){min-width:78vw;height:210px;scroll-snap-align:start}
+  .hero-photo-frame{border-radius:42% 42% 24px 24px}
+}
+@media(prefers-reduced-motion:reduce){.hero-photo-orbit{animation:none}.hero-photo,.image-story-card img,.about-static-photo,.rail-shot img{transition:none}}
