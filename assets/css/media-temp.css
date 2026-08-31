@@ -1,0 +1,23 @@
+/* Provizorní obrazové assety. Po dodání reálných fotografií stačí nahradit soubory v assets/images. */
+.hero-photo-wrap{position:relative;min-height:660px;display:grid;place-items:center;perspective:1200px}
+.hero-photo-frame{position:relative;width:min(580px,100%);aspect-ratio:.92;border-radius:48% 48% 30px 30px;overflow:hidden;box-shadow:0 38px 100px rgba(82,57,92,.18);border:1px solid rgba(201,149,82,.28);background:#efe1e9}
+.hero-photo-frame:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(96,69,111,.08));pointer-events:none}
+.hero-photo{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.hero-photo-orbit{position:absolute;inset:-7%;border:1px solid rgba(201,149,82,.42);border-radius:50%;pointer-events:none;animation:orbitSpin 28s linear infinite}
+.hero-photo-orbit:before,.hero-photo-orbit:after{content:'';position:absolute;border:1px solid rgba(201,149,82,.28);border-radius:50%;inset:8%}.hero-photo-orbit:after{inset:16%;border-style:dashed}
+.hero-photo-note{position:absolute;right:-18px;bottom:54px;z-index:4;padding:18px 20px;border-radius:18px;background:rgba(255,253,252,.9);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.75);box-shadow:0 18px 52px rgba(78,54,88,.15)}
+.hero-photo-note span{display:block;color:#c99552;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase}.hero-photo-note strong{font-family:'Cormorant Garamond',Georgia,serif;color:#60456f;font-size:1.35rem;font-weight:500}
+.about-static-photo{width:100%;height:100%;object-fit:cover;object-position:center;display:block;border-radius:30px;box-shadow:0 32px 86px rgba(82,57,92,.16)}
+.about-photo-static{position:absolute;inset:5%;z-index:1}
+.about-visual{overflow:hidden}
+.about-orbit,.experience-seal{z-index:3}
+
+/* Podstránky – obraz v hero funguje bez JS. */
+.subhero{isolation:isolate;position:relative}
+.subhero:before{content:'';position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(253,249,247,.98) 0%,rgba(250,242,244,.92) 46%,rgba(242,230,239,.55) 68%,rgba(242,230,239,.15) 100%),url('../images/hero-konstelace-temp.jpg') right 34% center/56% auto no-repeat;pointer-events:none}
+.subhero-inner{position:relative;z-index:2}
+.about-photo .portrait-arch,.visual-shell .portrait-arch{background:url('../images/marcela-temp.jpg') center/cover no-repeat!important}
+.about-photo .portrait-arch:before,.about-photo .portrait-arch:after,.visual-shell .portrait-arch:before,.visual-shell .portrait-arch:after{display:none!important}
+
+@media(max-width:900px){.hero-photo-wrap{min-height:560px}.hero-photo-note{right:4%;bottom:28px}.subhero:before{background:linear-gradient(rgba(253,249,247,.86),rgba(247,239,242,.9)),url('../images/hero-konstelace-temp.jpg') center/cover no-repeat;opacity:.72}}
+@media(max-width:640px){.hero-photo-wrap{min-height:460px}.hero-photo-frame{width:94%;border-radius:42% 42% 24px 24px}.hero-photo-note{right:0;bottom:15px;padding:14px 16px}.hero-photo-note strong{font-size:1.1rem}}
