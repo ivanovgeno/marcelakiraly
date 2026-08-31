@@ -91,6 +91,22 @@
 .cta-inner>div{max-width:720px!important}
 .cta-inner h2,.cta-inner p{margin-left:auto!important;margin-right:auto!important}
 
+/* Absolute background image URLs: reliable on GitHub Pages, custom domains and previews */
+.visual-story:before{
+  background-image:url('https://raw.githubusercontent.com/ivanovgeno/marcelakiraly/main/assets/images/constellation-bg.webp')!important;
+}
+.cta-band{
+  background:
+    linear-gradient(90deg,rgba(76,52,89,.92),rgba(112,75,122,.80)),
+    url('https://raw.githubusercontent.com/ivanovgeno/marcelakiraly/main/assets/images/constellation-bg.webp') center/cover no-repeat!important;
+}
+.subhero:before{
+  background:
+    linear-gradient(180deg,rgba(253,249,247,.90),rgba(250,242,244,.78)),
+    url('https://raw.githubusercontent.com/ivanovgeno/marcelakiraly/main/assets/images/constellation-bg.webp') center/cover no-repeat!important;
+  opacity:.6!important;
+}
+
 @media(max-width:1050px){
   .method-grid,.about-stage{grid-template-columns:1fr!important;gap:44px!important;text-align:center!important}
   .method-art,.about-visual{width:min(100%,680px);margin-inline:auto!important}
