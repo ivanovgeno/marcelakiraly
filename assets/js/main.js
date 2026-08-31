@@ -1,4 +1,11 @@
 'use strict';
+const typographyHref='assets/css/typography-cs.css';
+if(!document.querySelector(`link[href="${typographyHref}"]`)){
+  const typography=document.createElement('link');
+  typography.rel='stylesheet';
+  typography.href=typographyHref;
+  document.head.appendChild(typography);
+}
 const header=document.querySelector('[data-header], .site-header');
 const toggle=document.querySelector('.menu-toggle');
 const menu=document.querySelector('.mobile-menu');
