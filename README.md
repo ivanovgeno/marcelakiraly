@@ -1,18 +1,17 @@
-# Marcela Kiraly
+# Marcela Király
 
-Zdrojový repozitář nového webu Marcela Kiraly.
+Zdrojové soubory nového webu Marcely Király.
+
+## Technologie
+- statické HTML5
+- CSS
+- vanilla JavaScript
+- UTF-8 / čeština
 
 ## Struktura
+- `index.html` – úvodní stránka
+- `assets/css/` – styly
+- `assets/js/` – skripty
+- `assets/images/` – obrazové podklady včetně hero triptychu konstelací
 
-- `index.html` – hlavní stránka
-- `assets/css/style.css` – styly webu
-- `assets/js/main.js` – JavaScript
-- `assets/images/` – obrázky a grafika (přidává se podle potřeby)
-
-## Workflow
-
-Repozitář je připravený pro průběžné úpravy přes ChatGPT/GitHub. Nové verze mohou být zapisovány přímo do větve `main` nebo později přes pracovní větev + pull request, pokud budeme chtít bezpečné schvalování změn před nasazením.
-
-## Hlavní větev
-
-`main`
+Aktuální vizuální směr: konstelace, starorůžová/lila, tlumené zlato, moderní responzivní zpracování.
