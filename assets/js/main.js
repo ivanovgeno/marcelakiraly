@@ -13,6 +13,41 @@ ensureStylesheet('assets/css/constellation-2026.css');
 ensureStylesheet('assets/css/centered-2026.css');
 ensureStylesheet('assets/css/legal-mobile-2026.css');
 
+/* Canonical naming across the entire website. */
+const normalizeBrandText=(value='')=>value
+  .replace(/Marcela Kiraly/g,'Marcela Király')
+  .replace(/\bmyself connection\b/gi,'my self connection')
+  .replace(/\bmy\s+self\s+connection\b/gi,'my self connection');
+
+/* Homepage hero copy — approved wording. */
+const heroTitle=document.querySelector('.hero-copy h1');
+if(heroTitle) heroTitle.textContent='Pro chvíli, kdy cítíte, že jedna odpověď nestačí.';
+const heroLead=document.querySelector('.hero-copy .lead');
+if(heroLead) heroLead.textContent='Pochopte a přijměte svůj vlastní příběh. Konstelace pomáhají odhalit souvislosti, které běžně zůstávají skryté. V bezpečném prostoru hledáme nový pohled, větší lehkost a možnost změny.';
+
+/* Normalize visible copy and accessible/SEO labels on every page. */
+if(document.body){
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  const textNodes=[];
+  while(walker.nextNode()) textNodes.push(walker.currentNode);
+  textNodes.forEach(node=>{
+    if(node.parentElement?.closest('script,style')) return;
+    const normalized=normalizeBrandText(node.nodeValue||'');
+    if(normalized!==node.nodeValue) node.nodeValue=normalized;
+  });
+}
+document.title=normalizeBrandText(document.title);
+document.querySelectorAll('meta[content]').forEach(meta=>{
+  const value=meta.getAttribute('content')||'';
+  meta.setAttribute('content',normalizeBrandText(value));
+});
+document.querySelectorAll('[aria-label],[title],[alt]').forEach(el=>{
+  ['aria-label','title','alt'].forEach(attr=>{
+    if(!el.hasAttribute(attr)) return;
+    el.setAttribute(attr,normalizeBrandText(el.getAttribute(attr)||''));
+  });
+});
+
 /* Reliable image set. */
 const IMAGE_BASE='https://raw.githubusercontent.com/ivanovgeno/marcelakiraly/main/assets/images/';
 const IMAGE_MAP={
@@ -31,20 +66,20 @@ document.querySelectorAll('img').forEach(img=>{
   const filename=clean.split('/').pop();
   const target=IMAGE_MAP[filename]||filename;
   if(filename&&(src.includes('assets/images/')||IMAGE_MAP[filename])){
-    img.src=IMAGE_BASE+target+'?v=20260901a';
+    img.src=IMAGE_BASE+target+'?v=20260908a';
     img.addEventListener('error',()=>{
       if(img.dataset.imageFallback)return;
       img.dataset.imageFallback='true';
-      img.src=IMAGE_BASE+'hero-konstelace-temp.jpg?v=20260901a';
+      img.src=IMAGE_BASE+'hero-konstelace-temp.jpg?v=20260908a';
     },{once:true});
   }
 });
 
 const imageStyle=document.createElement('style');
 imageStyle.textContent=`
-.visual-story:before{background-image:url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260901a')!important}
-.cta-band{background:linear-gradient(90deg,rgba(76,52,89,.92),rgba(112,75,122,.80)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260901a') center/cover no-repeat!important}
-.subhero:before{background:linear-gradient(180deg,rgba(253,249,247,.90),rgba(250,242,244,.78)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260901a') center/cover no-repeat!important}
+.visual-story:before{background-image:url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260908a')!important}
+.cta-band{background:linear-gradient(90deg,rgba(76,52,89,.92),rgba(112,75,122,.80)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260908a') center/cover no-repeat!important}
+.subhero:before{background:linear-gradient(180deg,rgba(253,249,247,.90),rgba(250,242,244,.78)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260908a') center/cover no-repeat!important}
 `;
 document.head.appendChild(imageStyle);
 
@@ -69,7 +104,7 @@ if(footer&&!footer.querySelector('.footer-extras')){
       <a href="marketingovy-souhlas.html">Marketingový souhlas</a>
       <a href="obchodni-podminky.html">Obchodní podmínky</a>
     </nav>
-    <p class="footer-business-note">Provozovatel: Marcela Kiraly · IČO, sídlo, e-mail a telefon budou doplněny před ostrým spuštěním webu.</p>`;
+    <p class="footer-business-note">Provozovatel: Marcela Király · IČO, sídlo, e-mail a telefon budou doplněny před ostrým spuštěním webu.</p>`;
   const bottom=footer.querySelector('.inner-footer-bottom,.footer-bottom');
   if(bottom)footer.insertBefore(extras,bottom);else footer.appendChild(extras);
 }
