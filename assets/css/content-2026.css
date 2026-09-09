@@ -10,6 +10,7 @@
 .profile-home-title em{font-weight:400;color:var(--content-plum);}
 .profile-home-copy{min-width:0;}
 .profile-intro{font-family:"Cormorant Garamond",serif;font-size:clamp(1.65rem,2.6vw,2.4rem);line-height:1.18;color:var(--content-plum-deep);margin:0 0 34px;max-width:760px;}
+.profile-home .profile-intro{display:none;}
 .profile-pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:0 0 34px;}
 .profile-pillar{position:relative;padding:28px 24px 26px;border-radius:24px;background:rgba(255,255,255,.46);border:1px solid rgba(111,75,121,.12);box-shadow:0 18px 48px rgba(79,56,89,.06);backdrop-filter:blur(10px);}
 .profile-pillar::before{content:"";position:absolute;top:0;left:24px;width:42px;height:2px;background:linear-gradient(90deg,var(--content-gold),rgba(201,149,82,0));}
