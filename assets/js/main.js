@@ -10,7 +10,7 @@ const ensureStylesheet=(href)=>{
 };
 ensureStylesheet('assets/css/typography-cs.css');
 ensureStylesheet('assets/css/constellation-2026.css');
-ensureStylesheet('assets/css/centered-2026.css?v=20260909d');
+ensureStylesheet('assets/css/centered-2026.css?v=20260909e');
 ensureStylesheet('assets/css/legal-mobile-2026.css');
 
 const normalizeBrandText=(value='')=>value
@@ -23,38 +23,37 @@ if(heroTitle) heroTitle.textContent='Pro chvíle, kdy cítíte, že jedna odpov�
 const heroLead=document.querySelector('.hero-copy .lead');
 if(heroLead) heroLead.textContent='Pochopte a přijměte svůj vlastní příběh. Konstelace pomáhají odhalit souvislosti, které běžně zůstávají skryté. V bezpečném prostoru hledáme nový pohled, větší lehkost a možnost změny.';
 
-document.querySelectorAll('.hero-gallery figcaption').forEach(caption=>caption.remove());
+// Hero: dočasně jen tři prázdné obdélníky pro budoucí finální fotografie.
+document.querySelectorAll('.hero-gallery-card').forEach((card,index)=>{
+  card.innerHTML='';
+  card.setAttribute('aria-label',`Místo pro budoucí fotografii z konstelace ${index+1}`);
+  card.classList.add('is-placeholder');
+});
 
-const METHOD_HTML=`
+const METHOD_SHORT=`
   <p class="eyebrow">MY SELF CONNECTION</p>
   <h2>Konstelační technika <em>MY SELF CONNECTION</em></h2>
   <p><strong>Jsem konstelátorka, která pracuje s klienty pomocí jedinečné konstelační metody MY SELF CONNECTION od renomované terapeutky a autorky Michaely Bartošové.</strong></p>
   <p>Konstelační technika <strong>MY SELF CONNECTION</strong> (spojení se sebou samým) v rámci konstelační práce představuje specifický přístup zaměřený na vnitřní integraci a obnovu kontaktu s vlastní podstatou.</p>
-  <p><strong>Ladí na přítomnost a budoucnost.</strong></p>
+  <p><strong>Ladí na přítomnost a budoucnost.</strong></p>`;
+
+const METHOD_FULL=METHOD_SHORT+`
   <p>Je navržena tak, aby sloužila jako vysoce efektivní nástroj pro každodenní život a rozhodování. Nastavení jasných, hmatatelných kroků v realitě.</p>
   <div class="method-warning"><h3>Pro koho tato metoda není vhodná?</h3><p>Pro lidi v akutní psychotické krizi, s těžkými psychiatrickými diagnózami nebo pod vlivem návykových látek.</p></div>`;
 
 const path=location.pathname.split('/').pop()||'index.html';
 if(path==='index.html' || path===''){
   const method=document.querySelector('.method-copy');
-  if(method){
-    method.innerHTML=METHOD_HTML+'<a class="text-link" href="konstelace.html">Jak metoda funguje <i>↗</i></a>';
-  }
+  if(method) method.innerHTML=METHOD_SHORT+'<a class="text-link" href="konstelace.html">Jak metoda funguje <i>↗</i></a>';
 }
 if(path==='konstelace.html'){
   const method=document.querySelector('.dark-band .page-copy');
-  if(method){
-    method.innerHTML=METHOD_HTML+'<a class="btn btn-outline magnetic" href="kontakt.html"><span>Zeptat se na své téma</span><i>↗</i></a>';
-  }
+  if(method) method.innerHTML=METHOD_FULL+'<a class="btn btn-outline magnetic" href="kontakt.html"><span>Zeptat se na své téma</span><i>↗</i></a>';
 }
 if(path==='o-mne.html'){
   const lead=[...document.querySelectorAll('.page-copy .lead')].find(el=>/connection/i.test(el.textContent||''));
   if(lead){
     lead.innerHTML='Jmenuji se Marcela Király a při konstelační práci používám techniku <strong>MY SELF CONNECTION</strong>.';
-    const info=document.createElement('div');
-    info.className='method-inline-info';
-    info.innerHTML=METHOD_HTML;
-    lead.insertAdjacentElement('afterend',info);
   }
 }
 
@@ -90,23 +89,32 @@ document.querySelectorAll('img').forEach(img=>{
   const filename=clean.split('/').pop();
   const target=IMAGE_MAP[filename]||filename;
   if(filename&&(src.includes('assets/images/')||IMAGE_MAP[filename])){
-    img.src=IMAGE_BASE+target+'?v=20260909d';
-    img.addEventListener('error',()=>{if(img.dataset.imageFallback)return;img.dataset.imageFallback='true';img.src=IMAGE_BASE+'hero-konstelace-temp.jpg?v=20260909d'},{once:true});
+    img.src=IMAGE_BASE+target+'?v=20260909e';
+    img.addEventListener('error',()=>{if(img.dataset.imageFallback)return;img.dataset.imageFallback='true';img.src=IMAGE_BASE+'hero-konstelace-temp.jpg?v=20260909e'},{once:true});
   }
 });
 
 const imageStyle=document.createElement('style');
 imageStyle.textContent=`
-.hero-gallery figcaption{display:none!important}
-.hero-gallery-card{padding:0!important}
-.hero-gallery-card img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important}
+.hero-gallery-card.is-placeholder{
+  min-height:360px!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.38),rgba(231,214,228,.52))!important;
+  border:1px solid rgba(116,78,127,.18)!important;
+  box-shadow:0 22px 50px rgba(78,52,88,.08)!important;
+}
+.hero-gallery-card.is-placeholder::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.55),transparent 55%);
+  pointer-events:none;
+}
 .method-warning{margin-top:20px;padding:0;border:0;border-radius:0;background:transparent!important;color:inherit!important;box-shadow:none!important}
 .method-warning h3{margin:0 0 10px;color:inherit!important;font-size:1.15rem}
 .method-warning p{margin:0;color:inherit!important}
-.method-inline-info{margin-top:28px}
-.visual-story:before{background-image:url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909d')!important}
-.cta-band{background:linear-gradient(90deg,rgba(76,52,89,.92),rgba(112,75,122,.80)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909d') center/cover no-repeat!important}
-.subhero:before{background:linear-gradient(180deg,rgba(253,249,247,.90),rgba(250,242,244,.78)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909d') center/cover no-repeat!important}
+.visual-story:before{background-image:url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909e')!important}
+.cta-band{background:linear-gradient(90deg,rgba(76,52,89,.92),rgba(112,75,122,.80)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909e') center/cover no-repeat!important}
+.subhero:before{background:linear-gradient(180deg,rgba(253,249,247,.90),rgba(250,242,244,.78)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909e') center/cover no-repeat!important}
 `;
 document.head.appendChild(imageStyle);
 
