@@ -12,6 +12,7 @@ ensureStylesheet('assets/css/typography-cs.css');
 ensureStylesheet('assets/css/constellation-2026.css');
 ensureStylesheet('assets/css/centered-2026.css?v=20260909f');
 ensureStylesheet('assets/css/legal-mobile-2026.css');
+ensureStylesheet('assets/css/inspiration-gallery.css?v=20260909a');
 
 const normalizeBrandText=(value='')=>value
   .replace(/Marcela Kiraly/g,'Marcela Király')
@@ -23,7 +24,6 @@ if(heroTitle) heroTitle.textContent='Pro chvíle, kdy cítíte, že jedna odpov�
 const heroLead=document.querySelector('.hero-copy .lead');
 if(heroLead) heroLead.textContent='Pochopte a přijměte svůj vlastní příběh. Konstelace pomáhají odhalit souvislosti, které běžně zůstávají skryté. V bezpečném prostoru hledáme nový pohled, větší lehkost a možnost změny.';
 
-// Hero: dočasně jen tři prázdné obdélníky pro budoucí finální fotografie.
 document.querySelectorAll('.hero-gallery-card').forEach((card,index)=>{
   card.innerHTML='';
   card.setAttribute('aria-label',`Místo pro budoucí fotografii z konstelace ${index+1}`);
@@ -45,16 +45,6 @@ const path=location.pathname.split('/').pop()||'index.html';
 if(path==='index.html' || path===''){
   const method=document.querySelector('.method-copy');
   if(method) method.innerHTML=METHOD_SHORT+'<a class="text-link" href="konstelace.html">Jak metoda funguje <i>↗</i></a>';
-
-  const story=document.querySelector('.visual-story');
-  if(story){
-    story.innerHTML=`<div class="container inspiration-layout">
-      <div class="inspiration-heading reveal">
-        <p class="eyebrow">Tady čerpám inspiraci, klid i novou energii.</p>
-      </div>
-      <div class="story-media-grid inspiration-gallery" data-inspiration-gallery></div>
-    </div>`;
-  }
 }
 if(path==='konstelace.html'){
   const method=document.querySelector('.dark-band .page-copy');
@@ -122,10 +112,6 @@ imageStyle.textContent=`
 .method-warning{margin-top:20px;padding:0;border:0;border-radius:0;background:transparent!important;color:inherit!important;box-shadow:none!important}
 .method-warning h3{margin:0 0 10px;color:inherit!important;font-size:1.15rem}
 .method-warning p{margin:0;color:inherit!important}
-.inspiration-layout{display:block!important;text-align:center!important}
-.inspiration-heading{max-width:900px;margin:0 auto 34px!important;text-align:center!important}
-.inspiration-heading .eyebrow{margin:0!important;font-size:clamp(1rem,2vw,1.25rem)!important;letter-spacing:.06em!important}
-.inspiration-gallery:empty{display:block!important;min-height:0!important;margin:0!important}
 .visual-story:before{background-image:url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909f')!important}
 .cta-band{background:linear-gradient(90deg,rgba(76,52,89,.92),rgba(112,75,122,.80)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909f') center/cover no-repeat!important}
 .subhero:before{background:linear-gradient(180deg,rgba(253,249,247,.90),rgba(250,242,244,.78)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909f') center/cover no-repeat!important}
