@@ -10,7 +10,7 @@ const ensureStylesheet=(href)=>{
 };
 ensureStylesheet('assets/css/typography-cs.css');
 ensureStylesheet('assets/css/constellation-2026.css');
-ensureStylesheet('assets/css/centered-2026.css?v=20260909c');
+ensureStylesheet('assets/css/centered-2026.css?v=20260909d');
 ensureStylesheet('assets/css/legal-mobile-2026.css');
 
 const normalizeBrandText=(value='')=>value
@@ -28,6 +28,7 @@ document.querySelectorAll('.hero-gallery figcaption').forEach(caption=>caption.r
 const METHOD_HTML=`
   <p class="eyebrow">MY SELF CONNECTION</p>
   <h2>Konstelační technika <em>MY SELF CONNECTION</em></h2>
+  <p><strong>Jsem konstelátorka, která pracuje s klienty pomocí jedinečné konstelační metody MY SELF CONNECTION od renomované terapeutky a autorky Michaely Bartošové.</strong></p>
   <p>Konstelační technika <strong>MY SELF CONNECTION</strong> (spojení se sebou samým) v rámci konstelační práce představuje specifický přístup zaměřený na vnitřní integraci a obnovu kontaktu s vlastní podstatou.</p>
   <p><strong>Ladí na přítomnost a budoucnost.</strong></p>
   <p>Je navržena tak, aby sloužila jako vysoce efektivní nástroj pro každodenní život a rozhodování. Nastavení jasných, hmatatelných kroků v realitě.</p>
@@ -89,8 +90,8 @@ document.querySelectorAll('img').forEach(img=>{
   const filename=clean.split('/').pop();
   const target=IMAGE_MAP[filename]||filename;
   if(filename&&(src.includes('assets/images/')||IMAGE_MAP[filename])){
-    img.src=IMAGE_BASE+target+'?v=20260909c';
-    img.addEventListener('error',()=>{if(img.dataset.imageFallback)return;img.dataset.imageFallback='true';img.src=IMAGE_BASE+'hero-konstelace-temp.jpg?v=20260909c'},{once:true});
+    img.src=IMAGE_BASE+target+'?v=20260909d';
+    img.addEventListener('error',()=>{if(img.dataset.imageFallback)return;img.dataset.imageFallback='true';img.src=IMAGE_BASE+'hero-konstelace-temp.jpg?v=20260909d'},{once:true});
   }
 });
 
@@ -99,13 +100,13 @@ imageStyle.textContent=`
 .hero-gallery figcaption{display:none!important}
 .hero-gallery-card{padding:0!important}
 .hero-gallery-card img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important}
-.method-warning{margin-top:28px;padding:22px 24px;border:1px solid rgba(201,149,82,.28);border-radius:20px;background:rgba(255,255,255,.45)}
-.method-warning h3{margin:0 0 10px;font-size:1.15rem}
-.method-warning p{margin:0}
+.method-warning{margin-top:20px;padding:0;border:0;border-radius:0;background:transparent!important;color:inherit!important;box-shadow:none!important}
+.method-warning h3{margin:0 0 10px;color:inherit!important;font-size:1.15rem}
+.method-warning p{margin:0;color:inherit!important}
 .method-inline-info{margin-top:28px}
-.visual-story:before{background-image:url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909c')!important}
-.cta-band{background:linear-gradient(90deg,rgba(76,52,89,.92),rgba(112,75,122,.80)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909c') center/cover no-repeat!important}
-.subhero:before{background:linear-gradient(180deg,rgba(253,249,247,.90),rgba(250,242,244,.78)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909c') center/cover no-repeat!important}
+.visual-story:before{background-image:url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909d')!important}
+.cta-band{background:linear-gradient(90deg,rgba(76,52,89,.92),rgba(112,75,122,.80)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909d') center/cover no-repeat!important}
+.subhero:before{background:linear-gradient(180deg,rgba(253,249,247,.90),rgba(250,242,244,.78)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909d') center/cover no-repeat!important}
 `;
 document.head.appendChild(imageStyle);
 
@@ -138,7 +139,6 @@ const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const finePointer=window.matchMedia('(pointer:fine)').matches;
 if(header){const syncHeader=()=>header.classList.toggle('is-scrolled',window.scrollY>24);syncHeader();window.addEventListener('scroll',syncHeader,{passive:true})}
 if(toggle&&menu){const closeMenu=()=>{toggle.setAttribute('aria-expanded','false');menu.classList.remove('is-open');document.body.classList.remove('menu-open')};toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!open));menu.classList.toggle('is-open',!open);document.body.classList.toggle('menu-open',!open)});menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));window.addEventListener('resize',()=>{if(window.innerWidth>900)closeMenu()});document.addEventListener('keydown',event=>{if(event.key==='Escape')closeMenu()})}
-const reveals=document.querySelectorAll('.reveal');
-if(!reduceMotion&&'IntersectionObserver'in window){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}}),{threshold:.1,rootMargin:'0px 0px -24px'});reveals.forEach(el=>observer.observe(el))}else reveals.forEach(el=>el.classList.add('is-visible'));
+const reveals=document.querySelectorAll('.reveal');if(!reduceMotion&&'IntersectionObserver'in window){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}}),{threshold:.1,rootMargin:'0px 0px -24px'});reveals.forEach(el=>observer.observe(el))}else reveals.forEach(el=>el.classList.add('is-visible'));
 if(!reduceMotion&&finePointer){document.querySelectorAll('.magnetic').forEach(button=>{button.addEventListener('pointermove',event=>{const rect=button.getBoundingClientRect();button.style.setProperty('--mx',`${(event.clientX-rect.left-rect.width/2)*.14}px`);button.style.setProperty('--my',`${(event.clientY-rect.top-rect.height/2)*.18}px`)});button.addEventListener('pointerleave',()=>{button.style.setProperty('--mx','0px');button.style.setProperty('--my','0px')})})}
 if(form){form.addEventListener('submit',event=>{event.preventDefault();const status=form.querySelector('.form-status');if(status)status.textContent='Formulář je připravený. Po doplnění cílového e-mailu ho napojíme na reálné odesílání.'})}
