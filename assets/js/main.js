@@ -10,7 +10,7 @@ const ensureStylesheet=(href)=>{
 };
 ensureStylesheet('assets/css/typography-cs.css');
 ensureStylesheet('assets/css/constellation-2026.css');
-ensureStylesheet('assets/css/centered-2026.css?v=20260909e');
+ensureStylesheet('assets/css/centered-2026.css?v=20260909f');
 ensureStylesheet('assets/css/legal-mobile-2026.css');
 
 const normalizeBrandText=(value='')=>value
@@ -45,6 +45,16 @@ const path=location.pathname.split('/').pop()||'index.html';
 if(path==='index.html' || path===''){
   const method=document.querySelector('.method-copy');
   if(method) method.innerHTML=METHOD_SHORT+'<a class="text-link" href="konstelace.html">Jak metoda funguje <i>↗</i></a>';
+
+  const story=document.querySelector('.visual-story');
+  if(story){
+    story.innerHTML=`<div class="container inspiration-layout">
+      <div class="inspiration-heading reveal">
+        <p class="eyebrow">Tady čerpám inspiraci, klid i novou energii.</p>
+      </div>
+      <div class="story-media-grid inspiration-gallery" data-inspiration-gallery></div>
+    </div>`;
+  }
 }
 if(path==='konstelace.html'){
   const method=document.querySelector('.dark-band .page-copy');
@@ -89,8 +99,8 @@ document.querySelectorAll('img').forEach(img=>{
   const filename=clean.split('/').pop();
   const target=IMAGE_MAP[filename]||filename;
   if(filename&&(src.includes('assets/images/')||IMAGE_MAP[filename])){
-    img.src=IMAGE_BASE+target+'?v=20260909e';
-    img.addEventListener('error',()=>{if(img.dataset.imageFallback)return;img.dataset.imageFallback='true';img.src=IMAGE_BASE+'hero-konstelace-temp.jpg?v=20260909e'},{once:true});
+    img.src=IMAGE_BASE+target+'?v=20260909f';
+    img.addEventListener('error',()=>{if(img.dataset.imageFallback)return;img.dataset.imageFallback='true';img.src=IMAGE_BASE+'hero-konstelace-temp.jpg?v=20260909f'},{once:true});
   }
 });
 
@@ -112,9 +122,13 @@ imageStyle.textContent=`
 .method-warning{margin-top:20px;padding:0;border:0;border-radius:0;background:transparent!important;color:inherit!important;box-shadow:none!important}
 .method-warning h3{margin:0 0 10px;color:inherit!important;font-size:1.15rem}
 .method-warning p{margin:0;color:inherit!important}
-.visual-story:before{background-image:url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909e')!important}
-.cta-band{background:linear-gradient(90deg,rgba(76,52,89,.92),rgba(112,75,122,.80)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909e') center/cover no-repeat!important}
-.subhero:before{background:linear-gradient(180deg,rgba(253,249,247,.90),rgba(250,242,244,.78)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909e') center/cover no-repeat!important}
+.inspiration-layout{display:block!important;text-align:center!important}
+.inspiration-heading{max-width:900px;margin:0 auto 34px!important;text-align:center!important}
+.inspiration-heading .eyebrow{margin:0!important;font-size:clamp(1rem,2vw,1.25rem)!important;letter-spacing:.06em!important}
+.inspiration-gallery:empty{display:block!important;min-height:0!important;margin:0!important}
+.visual-story:before{background-image:url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909f')!important}
+.cta-band{background:linear-gradient(90deg,rgba(76,52,89,.92),rgba(112,75,122,.80)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909f') center/cover no-repeat!important}
+.subhero:before{background:linear-gradient(180deg,rgba(253,249,247,.90),rgba(250,242,244,.78)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909f') center/cover no-repeat!important}
 `;
 document.head.appendChild(imageStyle);
 
