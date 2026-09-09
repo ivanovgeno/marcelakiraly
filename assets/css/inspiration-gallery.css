@@ -1,0 +1,20 @@
+.inspiration-section{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(252,248,247,.98),rgba(247,239,244,.92));}
+.inspiration-section::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 16% 18%,rgba(213,184,202,.18),transparent 28%),radial-gradient(circle at 82% 72%,rgba(205,158,92,.10),transparent 30%);}
+.inspiration-section .container{position:relative;z-index:1;}
+.inspiration-section .section-heading{margin-bottom:34px;}
+.inspiration-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;}
+.inspiration-card{position:relative;margin:0;min-height:360px;aspect-ratio:3/4;border-radius:28px;overflow:hidden;background-image:url('../images/inspiration-sprite.jpg?v=20260909a');background-repeat:no-repeat;background-size:100% 600%;border:1px solid rgba(179,137,102,.18);box-shadow:0 22px 60px rgba(84,60,91,.10);isolation:isolate;transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s ease,border-color .45s ease;}
+.inspiration-card::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(247,238,245,.06),rgba(93,66,103,.06)),radial-gradient(circle at 50% 10%,rgba(255,244,223,.18),transparent 38%);mix-blend-mode:soft-light;pointer-events:none;z-index:1;}
+.inspiration-card::after{content:"";position:absolute;inset:12px;border:1px solid rgba(255,255,255,.28);border-radius:21px;pointer-events:none;z-index:2;}
+.inspiration-card:hover{transform:translateY(-5px) scale(1.008);box-shadow:0 30px 80px rgba(84,60,91,.15);border-color:rgba(205,158,92,.34);}
+.inspiration-1{background-position:center 0%;}
+.inspiration-2{background-position:center 20%;}
+.inspiration-3{background-position:center 40%;}
+.inspiration-4{background-position:center 60%;}
+.inspiration-5{background-position:center 80%;}
+.inspiration-6{background-position:center 100%;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+@media(max-width:980px){.inspiration-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.inspiration-card{min-height:320px;border-radius:24px}}
+@media(max-width:620px){.inspiration-grid{grid-template-columns:1fr;max-width:560px;margin-inline:auto}.inspiration-card{aspect-ratio:4/5;min-height:0;border-radius:22px}.inspiration-card::after{inset:10px;border-radius:16px}.inspiration-section .section-heading{margin-bottom:24px}}
+@media(hover:none){.inspiration-card:hover{transform:none;box-shadow:0 22px 60px rgba(84,60,91,.10)}}
+@media(prefers-reduced-motion:reduce){.inspiration-card{transition:none}}
