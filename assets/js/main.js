@@ -12,7 +12,7 @@ ensureStylesheet('assets/css/typography-cs.css');
 ensureStylesheet('assets/css/constellation-2026.css');
 ensureStylesheet('assets/css/centered-2026.css?v=20260909f');
 ensureStylesheet('assets/css/legal-mobile-2026.css');
-ensureStylesheet('assets/css/inspiration-gallery.css?v=20260909a');
+ensureStylesheet('assets/css/inspiration-gallery.css?v=20260909b');
 
 const normalizeBrandText=(value='')=>value
   .replace(/Marcela Kiraly/g,'Marcela Király')
@@ -117,6 +117,42 @@ imageStyle.textContent=`
 .subhero:before{background:linear-gradient(180deg,rgba(253,249,247,.90),rgba(250,242,244,.78)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909f') center/cover no-repeat!important}
 `;
 document.head.appendChild(imageStyle);
+
+const inspirationGrid=document.querySelector('.inspiration-grid');
+if(inspirationGrid&&!inspirationGrid.closest('.inspiration-carousel')){
+  const cards=[...inspirationGrid.children];
+  const carousel=document.createElement('div');
+  carousel.className='inspiration-carousel';
+  carousel.setAttribute('aria-label','Carousel inspiračních fotografií');
+  const viewport=document.createElement('div');
+  viewport.className='inspiration-viewport';
+  const track=document.createElement('div');
+  track.className='inspiration-track';
+  const page1=document.createElement('div');
+  page1.className='inspiration-page';
+  const page2=document.createElement('div');
+  page2.className='inspiration-page';
+  cards.slice(0,3).forEach(card=>page1.appendChild(card));
+  cards.slice(3,6).forEach(card=>page2.appendChild(card));
+  track.append(page1,page2);
+  viewport.appendChild(track);
+  const controls=document.createElement('div');
+  controls.className='inspiration-controls';
+  controls.innerHTML='<button class="inspiration-arrow inspiration-prev" type="button" aria-label="Předchozí tři fotografie">←</button><div class="inspiration-dots" aria-hidden="true"><span class="inspiration-dot is-active"></span><span class="inspiration-dot"></span></div><button class="inspiration-arrow inspiration-next" type="button" aria-label="Další tři fotografie">→</button>';
+  carousel.append(viewport,controls);
+  inspirationGrid.replaceWith(carousel);
+  let page=0;
+  const dots=[...controls.querySelectorAll('.inspiration-dot')];
+  const render=()=>{
+    track.style.transform=`translateX(-${page*50}%)`;
+    dots.forEach((dot,index)=>dot.classList.toggle('is-active',index===page));
+    controls.querySelector('.inspiration-prev').disabled=page===0;
+    controls.querySelector('.inspiration-next').disabled=page===1;
+  };
+  controls.querySelector('.inspiration-prev').addEventListener('click',()=>{page=0;render()});
+  controls.querySelector('.inspiration-next').addEventListener('click',()=>{page=1;render()});
+  render();
+}
 
 const footer=document.querySelector('.site-footer,.inner-footer');
 if(footer&&!footer.querySelector('.footer-extras')){
