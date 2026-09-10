@@ -54,7 +54,7 @@ if(path==='index.html' || path===''){
 }
 if(path==='konstelace.html'){
   const method=document.querySelector('.dark-band .page-copy');
-  if(method) method.innerHTML=METHOD_FULL+'<a class="btn btn-outline magnetic" href="kontakt.html"><span>Zeptat se na své téma</span><i>↗</i></a>';
+  if(method&&!method.hasAttribute('data-static-method')) method.innerHTML=METHOD_FULL+'<a class="btn btn-outline magnetic" href="kontakt.html"><span>Zeptat se na své téma</span><i>↗</i></a>';
 }
 if(path==='o-mne.html'){
   const lead=[...document.querySelectorAll('.page-copy .lead')].find(el=>/connection/i.test(el.textContent||''));
