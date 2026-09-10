@@ -20,7 +20,7 @@ const normalizeBrandText=(value='')=>value
   .replace(/\bmy\s+self\s+connection\b/gi,'MY SELF CONNECTION');
 
 const heroTitle=document.querySelector('.hero-copy h1');
-if(heroTitle) heroTitle.textContent='Pro chvíle, kdy cítíte, že jedna odpověď nestačí.';
+if(heroTitle) heroTitle.innerHTML='Pro chvíle,<br>kdy cítíte, že jedna<br>odpověď nestačí.';
 const heroLead=document.querySelector('.hero-copy .lead');
 if(heroLead) heroLead.textContent='Pochopte a přijměte svůj vlastní příběh. Konstelace pomáhají odhalit souvislosti, které běžně zůstávají skryté. V bezpečném prostoru hledáme nový pohled, větší lehkost a možnost změny.';
 
@@ -45,6 +45,10 @@ const path=location.pathname.split('/').pop()||'index.html';
 if(path==='index.html' || path===''){
   const method=document.querySelector('.method-copy');
   if(method) method.innerHTML=METHOD_SHORT+'<a class="text-link" href="konstelace.html">Jak metoda funguje <i>↗</i></a>';
+  const processTitle=document.querySelector('.process .section-heading h2');
+  if(processTitle) processTitle.innerHTML='Tři kroky.<br><em>Bez tlaku na výkon.</em>';
+  const aboutTitle=document.querySelector('.profile-home .profile-intro');
+  if(aboutTitle) aboutTitle.innerHTML='Držím klientovi<br>bezpečný prostor';
 }
 if(path==='konstelace.html'){
   const method=document.querySelector('.dark-band .page-copy');
