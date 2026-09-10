@@ -49,6 +49,8 @@ if(path==='index.html' || path===''){
   if(processTitle) processTitle.innerHTML='Tři kroky.<br><em>Bez tlaku na výkon.</em>';
   const aboutTitle=document.querySelector('.profile-home .profile-intro');
   if(aboutTitle) aboutTitle.innerHTML='Držím klientovi<br>bezpečný prostor';
+  const bottomCtaTitle=document.querySelector('.cta-band .cta-inner h2');
+  if(bottomCtaTitle) bottomCtaTitle.textContent='Jste připraveni?';
 }
 if(path==='konstelace.html'){
   const method=document.querySelector('.dark-band .page-copy');
@@ -159,6 +161,11 @@ if(inspirationGrid&&!inspirationGrid.closest('.inspiration-carousel')){
 }
 
 const footer=document.querySelector('.site-footer,.inner-footer');
+if(footer){
+  [...footer.querySelectorAll('p')].forEach(note=>{
+    if(note.textContent.trim()==='Citlivé provázení pro chvíle, kdy chcete uvidět širší souvislosti.') note.remove();
+  });
+}
 if(footer&&!footer.querySelector('.footer-extras')){
   const extras=document.createElement('div');
   extras.className='container footer-extras';
