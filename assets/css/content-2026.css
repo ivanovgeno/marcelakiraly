@@ -38,6 +38,7 @@
 /* MY SELF CONNECTION — návrat k původnímu rozložení, jen lepší rytmus */
 .method-band .method-grid,.dark-band .page-image-split{align-items:center;}
 .method-band .method-copy,.dark-band .page-copy{max-width:680px;}
+.method-band .method-copy>.eyebrow{color:var(--content-gold)!important;}
 .method-band .method-copy>h2,.dark-band .page-copy>h2{margin-bottom:24px;max-width:13ch;}
 .method-band .method-copy>p:not(.eyebrow),.dark-band .page-copy>p:not(.eyebrow){max-width:640px;line-height:1.78;margin:0 0 17px;}
 .method-band .method-copy>p:nth-of-type(2),.dark-band .page-copy>p:nth-of-type(2){font-size:1.03rem;}
