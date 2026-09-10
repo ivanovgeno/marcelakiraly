@@ -7,8 +7,9 @@
 .profile-home-inner>div:first-child::after{content:"";position:absolute;inset:14px;border:1px solid rgba(255,255,255,.32);border-radius:26px;pointer-events:none;}
 .profile-home-kicker,.profile-home-title{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
 .profile-home-copy{min-width:0;}
-.profile-home .profile-intro{display:block;font-family:"Cormorant Garamond",serif;font-size:clamp(2.25rem,4vw,4.2rem);line-height:1.02;letter-spacing:-.03em;color:var(--content-plum-deep);margin:0 auto 30px;max-width:12ch;text-align:center;}
+.profile-home .profile-intro{display:block;font-family:"Cormorant Garamond",serif;font-size:clamp(2.25rem,4vw,4.2rem);line-height:1.02;letter-spacing:-.03em;color:var(--content-plum-deep);margin:0 auto 22px;max-width:12ch;text-align:center;}
 .profile-pillars{display:block;margin:0;}
+.profile-home .profile-pillars::before{content:"Jmenuji se Marcela Király. Mám dar stojící na třech hlavních pilířích";display:block;margin:0 0 20px;color:var(--content-gold);font-size:.78rem;line-height:1.55;letter-spacing:.14em;text-transform:uppercase;font-weight:700;text-align:center;}
 .profile-pillar{display:grid;grid-template-columns:46px minmax(0,1fr);gap:14px 18px;padding:20px 0 22px;border-top:1px solid rgba(111,75,121,.14);}
 .profile-pillar:last-child{border-bottom:1px solid rgba(111,75,121,.14);}
 .profile-pillar .profile-num{font-size:.72rem;letter-spacing:.15em;color:var(--content-gold);font-weight:700;padding-top:4px;}
@@ -57,6 +58,7 @@
   .profile-home-inner>div:first-child{min-height:390px;border-radius:26px;}
   .profile-home-inner>div:first-child::after{inset:10px;border-radius:20px;}
   .profile-home .profile-intro{font-size:clamp(2.25rem,11vw,3.4rem);}
+  .profile-home .profile-pillars::before{font-size:.72rem;letter-spacing:.11em;}
   .profile-pillar{grid-template-columns:38px 1fr;gap:10px 14px;}
   .profile-pillar p{grid-column:1/-1;padding-left:52px;}
   .about-original .page-image-split,.about-story-original .page-image-split{gap:28px;}
