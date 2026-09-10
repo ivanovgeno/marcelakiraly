@@ -5,13 +5,11 @@
 .constellations-subhero h1{max-width:820px;}
 .constellations-subhero .lead{max-width:760px;}
 
-.constellation-intro .page-image-split{grid-template-columns:minmax(300px,.76fr) minmax(0,1.18fr);}
-.constellation-placeholder-main{min-height:560px;border-radius:30px;border:1px solid rgba(111,75,121,.16);background:linear-gradient(145deg,rgba(255,255,255,.5),rgba(235,223,232,.72));box-shadow:0 24px 68px rgba(79,56,89,.08);position:relative;overflow:hidden;}
-.constellation-placeholder-main::before{content:"";position:absolute;inset:18px;border:1px solid rgba(201,149,82,.24);border-radius:22px;}
-.constellation-placeholder-main::after{content:"Fotografie doplníme";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(111,75,121,.5);white-space:nowrap;}
+.constellation-intro .container{max-width:1080px;}
+.constellation-intro .page-copy{max-width:820px;}
 .constellation-intro .page-copy>p{line-height:1.8;}
 .constellation-intro .page-copy .lead{font-size:1.08rem;}
-.constellation-safe-note{margin-top:24px;padding:20px 22px;border-left:2px solid var(--gold);background:rgba(201,149,82,.06);border-radius:0 18px 18px 0;color:#5f5661;line-height:1.75;}
+.constellation-safe-note{margin:18px 0 0;padding:0;border:0;background:transparent;border-radius:0;color:#5f5661;line-height:1.8;}
 
 .constellation-steps .section-heading{margin-bottom:34px;}
 .constellation-steps .system-points{margin-top:0;}
@@ -25,8 +23,8 @@
 .constellation-photo-placeholder::before{content:"";position:absolute;inset:14px;border:1px solid rgba(201,149,82,.22);border-radius:21px;}
 .constellation-photo-placeholder span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(111,75,121,.48);white-space:nowrap;}
 
-.constellation-method .page-image-split{grid-template-columns:minmax(0,1.08fr) minmax(300px,.72fr);}
-.constellation-method .page-copy{max-width:720px;}
+.constellation-method .container{max-width:1080px;}
+.constellation-method .page-copy{max-width:760px;}
 .constellation-method .page-copy .eyebrow{color:var(--gold)!important;}
 .constellation-method .page-copy h2{max-width:14ch;}
 .constellation-method .page-copy>p:not(.eyebrow){line-height:1.8;}
@@ -35,20 +33,14 @@
 .constellation-author-note .eyebrow{margin-bottom:10px;}
 .constellation-author-note h3{font-family:var(--serif);font-size:clamp(1.7rem,2.5vw,2.35rem);font-weight:500;color:#fff;margin:0 0 8px;}
 .constellation-author-note p{margin:0;color:rgba(255,255,255,.84);line-height:1.75;}
-.constellation-method-placeholder{min-height:520px;border-radius:30px;border:1px solid rgba(236,205,142,.22);background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.025));position:relative;overflow:hidden;}
-.constellation-method-placeholder::before{content:"";position:absolute;inset:18px;border:1px solid rgba(240,207,145,.18);border-radius:22px;}
-.constellation-method-placeholder::after{content:"Fotografie doplníme";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.42);white-space:nowrap;}
 
 @media(max-width:820px){
   .constellations-subhero{padding-top:78px;}
   .constellations-subhero .subhero-inner{padding-top:54px;padding-bottom:42px;}
-  .constellation-intro .page-image-split,.constellation-method .page-image-split{grid-template-columns:1fr;}
-  .constellation-placeholder-main,.constellation-method-placeholder{min-height:440px;}
   .constellation-photo-grid{grid-template-columns:1fr;}
   .constellation-photo-placeholder{max-width:560px;width:100%;margin-inline:auto;}
 }
 
 @media(max-width:560px){
-  .constellation-placeholder-main,.constellation-method-placeholder{min-height:360px;border-radius:24px;}
   .constellation-photo-placeholder{border-radius:24px;}
 }
