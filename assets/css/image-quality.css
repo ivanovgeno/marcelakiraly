@@ -1,0 +1,15 @@
+/* Image quality pass — keep raster assets crisp and avoid browser softening. */
+img{image-rendering:auto;-ms-interpolation-mode:bicubic;filter:none!important;}
+.hero-gallery-card img,.inspiration-card img,.about-photo-placeholder img,.about-portrait-2026 img{transform:none!important;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
+.hero-gallery-card,.inspiration-card{contain:paint;}
+.home-photo-strip .hero-gallery{max-width:1080px;margin-inline:auto!important;}
+.home-photo-strip .hero-gallery-card img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;}
+.inspiration-carousel{max-width:1040px;margin-inline:auto;}
+.inspiration-card img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;}
+.inspiration-card:hover img{transform:none!important;}
+.about-photo-placeholder img,.about-portrait-2026 img{width:100%;height:100%;object-fit:cover;object-position:50% 34%;}
+.profile-home-visual{background-size:cover!important;background-repeat:no-repeat!important;image-rendering:auto;}
+@media(max-width:720px){
+  .home-photo-strip .hero-gallery,.inspiration-carousel{max-width:560px;}
+  .inspiration-card{max-width:440px!important;}
+}
