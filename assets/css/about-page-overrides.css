@@ -7,9 +7,11 @@
 
 .about-simple{padding-top:38px;padding-bottom:124px;background:linear-gradient(180deg,#fffdfc 0%,#faf4f7 100%);}
 .about-simple-grid{display:grid;grid-template-columns:minmax(300px,.82fr) minmax(0,1.18fr);gap:clamp(52px,7vw,96px);align-items:center;max-width:1080px;}
-.about-photo-placeholder{position:relative;min-height:680px;border-radius:34px;border:1px solid rgba(111,75,121,.16);background:linear-gradient(145deg,rgba(255,255,255,.62),rgba(232,219,230,.68));box-shadow:0 24px 68px rgba(79,56,89,.08);overflow:hidden;}
-.about-photo-placeholder::before{content:"";position:absolute;inset:15px;border:1px solid rgba(201,149,82,.25);border-radius:27px;}
+.about-photo-placeholder{position:relative;min-height:680px;border-radius:34px;border:1px solid rgba(111,75,121,.16);background:linear-gradient(145deg,rgba(255,255,255,.62),rgba(232,219,230,.68));box-shadow:0 24px 68px rgba(79,56,89,.08);overflow:hidden;margin:0;}
+.about-photo-placeholder::before{content:"";position:absolute;inset:15px;border:1px solid rgba(201,149,82,.25);border-radius:27px;z-index:2;pointer-events:none;}
 .about-photo-placeholder::after{content:"Fotografie Marcely";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(111,75,121,.46);white-space:nowrap;}
+.about-photo-placeholder.has-photo::after{content:none;}
+.about-photo-placeholder.has-photo img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:50% 38%;}
 .about-simple-copy{max-width:690px;}
 .about-simple-copy .about-name{display:flex;align-items:center;gap:12px;margin:0 0 24px;color:var(--gold);font-size:.76rem;line-height:1;text-transform:uppercase;letter-spacing:.20em;font-weight:700;}
 .about-simple-copy .about-name::before{content:"";width:30px;height:1px;background:currentColor;flex:0 0 auto;}
@@ -37,6 +39,7 @@
 @media(max-width:560px){
   .about-photo-placeholder{min-height:470px;border-radius:26px;}
   .about-photo-placeholder::before{inset:11px;border-radius:20px;}
+  .about-photo-placeholder.has-photo img{object-position:50% 34%;}
   .about-simple-copy .about-name{font-size:.7rem;letter-spacing:.16em;}
   .about-hero-kicker{font-size:.72rem;letter-spacing:.1em;}
 }
