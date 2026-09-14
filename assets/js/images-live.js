@@ -60,7 +60,6 @@
         card.setAttribute('aria-label', labels[index]);
       });
     } catch (error) {
-      // Keep a graceful local fallback if the gallery data cannot be loaded.
       const fallbacks = ['hero-konstelace-1.jpg', 'hero-konstelace-2.jpg', 'hero-konstelace-3.jpg'];
       cards.forEach((card, index) => {
         card.classList.remove('is-placeholder');
@@ -70,10 +69,72 @@
     }
   };
 
-  setupHomepageGallery();
+  const setupInspirationGallery = async () => {
+    const carousel = document.querySelector('.inspiration-carousel');
+    if (!carousel) return;
 
-  // main.js used to replace local images with raw GitHub placeholder files.
-  // Put all regular site images back on stable relative URLs instead.
+    try {
+      const urls = Array.from({ length: 8 }, (_, i) => `assets/data/inspiration-gallery-${i + 1}.txt?v=20260914b`);
+      const parts = await Promise.all(urls.map(async (url) => {
+        const response = await fetch(url, { cache: 'force-cache' });
+        if (!response.ok) throw new Error(`Inspirace: ${response.status}`);
+        return response.text();
+      }));
+      const data = JSON.parse(parts.join(''));
+      if (!Array.isArray(data.images) || data.images.length < 9) return;
+
+      const labels = [
+        'Zimní krajina se sluncem',
+        'Strom v letní zeleni',
+        'Klidná hladina jezera',
+        'Výhled do zelených hor',
+        'Lesní potok',
+        'Lavička u vody při západu slunce',
+        'Květy při západu slunce',
+        'Rozkvetlé bílé květy',
+        'Zimní les se sluncem'
+      ];
+      const track = carousel.querySelector('.inspiration-track');
+      const controls = carousel.querySelector('.inspiration-controls');
+      if (!track || !controls) return;
+
+      track.innerHTML = '';
+      for (let pageIndex = 0; pageIndex < 3; pageIndex += 1) {
+        const page = document.createElement('div');
+        page.className = 'inspiration-page';
+        data.images.slice(pageIndex * 3, pageIndex * 3 + 3).forEach((base64, itemIndex) => {
+          const absoluteIndex = pageIndex * 3 + itemIndex;
+          const figure = document.createElement('figure');
+          figure.className = 'inspiration-card';
+          const label = labels[absoluteIndex] || 'Inspirace';
+          figure.innerHTML = `<img src="data:image/webp;base64,${base64}" alt="${label}" loading="lazy" decoding="async">`;
+          page.appendChild(figure);
+        });
+        track.appendChild(page);
+      }
+
+      controls.innerHTML = '<button class="inspiration-arrow inspiration-prev" type="button" aria-label="Předchozí tři fotografie">←</button><div class="inspiration-dots" aria-hidden="true"><span class="inspiration-dot is-active"></span><span class="inspiration-dot"></span><span class="inspiration-dot"></span></div><button class="inspiration-arrow inspiration-next" type="button" aria-label="Další tři fotografie">→</button>';
+      let page = 0;
+      const dots = [...controls.querySelectorAll('.inspiration-dot')];
+      const prev = controls.querySelector('.inspiration-prev');
+      const next = controls.querySelector('.inspiration-next');
+      const render = () => {
+        track.style.transform = `translateX(-${page * (100 / 3)}%)`;
+        dots.forEach((dot, index) => dot.classList.toggle('is-active', index === page));
+        prev.disabled = page === 0;
+        next.disabled = page === 2;
+      };
+      prev.addEventListener('click', () => { page = Math.max(0, page - 1); render(); });
+      next.addEventListener('click', () => { page = Math.min(2, page + 1); render(); });
+      render();
+    } catch (error) {
+      // Původní prázdné karty zůstanou jako bezpečný fallback.
+    }
+  };
+
+  setupHomepageGallery();
+  setupInspirationGallery();
+
   const reverseMap = {
     'hero-constellations-v2.jpg': 'hero-constellations.webp',
     'constellation-system-v2.jpg': 'constellation-system.webp',
