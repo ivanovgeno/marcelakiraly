@@ -13,6 +13,10 @@ ensureStylesheet('assets/css/constellation-2026.css');
 ensureStylesheet('assets/css/centered-2026.css?v=20260909f');
 ensureStylesheet('assets/css/legal-mobile-2026.css');
 ensureStylesheet('assets/css/inspiration-gallery.css?v=20260909b');
+const uxRefreshHref='assets/css/ux-refresh-20260914.css?v=20260914a';
+ensureStylesheet(uxRefreshHref);
+const uxRefreshLink=document.querySelector(`link[href="${uxRefreshHref}"]`);
+if(uxRefreshLink) document.head.appendChild(uxRefreshLink);
 
 const normalizeBrandText=(value='')=>value
   .replace(/Marcela Kiraly/g,'Marcela Király')
@@ -77,16 +81,16 @@ document.title=normalizeBrandText(document.title);
 document.querySelectorAll('meta[content]').forEach(meta=>meta.setAttribute('content',normalizeBrandText(meta.getAttribute('content')||'')));
 document.querySelectorAll('[aria-label],[title],[alt]').forEach(el=>['aria-label','title','alt'].forEach(attr=>{if(el.hasAttribute(attr))el.setAttribute(attr,normalizeBrandText(el.getAttribute(attr)||''))}));
 
-const IMAGE_BASE='https://raw.githubusercontent.com/ivanovgeno/marcelakiraly/main/assets/images/';
+const IMAGE_BASE='assets/images/';
 const IMAGE_MAP={
   'hero-constellations.webp':'hero-constellations-v2.jpg',
   'constellation-system.webp':'constellation-system-v2.jpg',
   'constellation-space.webp':'constellation-space-v2.jpg',
   'constellation-landscape.webp':'constellation-landscape-v2.jpg',
-  'portrait-constellations.webp':'portrait-constellations-v2.jpg',
-  'constellation-bg.webp':'constellation-bg-v2.jpg',
+  'portrait-constellations.webp':'marcela-kiraly.webp',
+  'marcela-kiraly-hq.webp':'marcela-kiraly.webp',
   'hero-konstelace-temp.jpg':'hero-constellations-v2.jpg',
-  'marcela-temp.jpg':'portrait-constellations-v2.jpg'
+  'marcela-temp.jpg':'marcela-kiraly.webp'
 };
 document.querySelectorAll('img').forEach(img=>{
   if(img.closest('.hero-gallery')) return;
@@ -96,7 +100,7 @@ document.querySelectorAll('img').forEach(img=>{
   const target=IMAGE_MAP[filename]||filename;
   if(filename&&(src.includes('assets/images/')||IMAGE_MAP[filename])){
     img.src=IMAGE_BASE+target+'?v=20260909f';
-    img.addEventListener('error',()=>{if(img.dataset.imageFallback)return;img.dataset.imageFallback='true';img.src=IMAGE_BASE+'hero-konstelace-temp.jpg?v=20260909f'},{once:true});
+    img.addEventListener('error',()=>{if(img.dataset.imageFallback)return;img.dataset.imageFallback='true';img.src=IMAGE_BASE+'hero-constellations-v2.jpg?v=20260914'},{once:true});
   }
 });
 
@@ -118,9 +122,9 @@ imageStyle.textContent=`
 .method-warning{margin-top:20px;padding:0;border:0;border-radius:0;background:transparent!important;color:inherit!important;box-shadow:none!important}
 .method-warning h3{margin:0 0 10px;color:inherit!important;font-size:1.15rem}
 .method-warning p{margin:0;color:inherit!important}
-.visual-story:before{background-image:url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909f')!important}
-.cta-band{background:linear-gradient(90deg,rgba(76,52,89,.92),rgba(112,75,122,.80)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909f') center/cover no-repeat!important}
-.subhero:before{background:linear-gradient(180deg,rgba(253,249,247,.90),rgba(250,242,244,.78)),url('${IMAGE_BASE}constellation-bg-v2.jpg?v=20260909f') center/cover no-repeat!important}
+.visual-story:before{background-image:url('${IMAGE_BASE}constellation-bg.webp?v=20260914')!important}
+.cta-band{background:linear-gradient(90deg,rgba(76,52,89,.92),rgba(112,75,122,.80)),url('${IMAGE_BASE}constellation-bg.webp?v=20260914') center/cover no-repeat!important}
+.subhero:before{background:linear-gradient(180deg,rgba(253,249,247,.90),rgba(250,242,244,.78)),url('${IMAGE_BASE}constellation-bg.webp?v=20260914') center/cover no-repeat!important}
 `;
 document.head.appendChild(imageStyle);
 

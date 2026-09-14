@@ -3,54 +3,37 @@
 (() => {
   const HQ_VERSION = '20260914hq2';
   const local = (name) => `assets/images/${name}?v=${HQ_VERSION}`;
-  const spritePosition = ['0% 50%', '50% 50%', '100% 50%'];
 
   const addLiveGalleryStyles = () => {
     if (document.getElementById('live-gallery-styles')) return;
     const style = document.createElement('style');
     style.id = 'live-gallery-styles';
     style.textContent = `
-      .home-photo-strip{padding:44px 0 88px;background:linear-gradient(180deg,#f7eff2 0%,#fffdfc 100%)}
-      .home-photo-strip .hero-gallery{margin:0 auto!important}
-      .home-photo-strip .hero-gallery-card{
+      .hero-gallery-card{
         background-color:#f1e7eb!important;
-        background-repeat:no-repeat!important;
-        background-size:300% 100%!important;
         image-rendering:auto!important;
       }
-      .inspiration-track{display:flex!important;width:300%!important}
-      .inspiration-page{width:33.333333%!important;flex:0 0 33.333333%!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:22px!important}
-      .inspiration-card{
-        background-repeat:no-repeat!important;
-        background-size:300% 100%!important;
-        image-rendering:auto!important;
-      }
+      .inspiration-track{display:flex!important;width:max-content!important;gap:16px!important;transform:none!important;transition:none!important}
+      .inspiration-page{display:contents!important}
+      .inspiration-card{image-rendering:auto!important}
       .inspiration-card::before{z-index:1!important;background:linear-gradient(180deg,rgba(255,255,255,.015),rgba(64,42,73,.035))!important}
       .profile-home-visual{
-        background-image:url('${local('marcela-kiraly-hq.webp')}')!important;
+        background-image:url('${local('marcela-kiraly.webp')}')!important;
         background-size:cover!important;
         background-position:center 28%!important;
         background-repeat:no-repeat!important;
       }
-      @media(max-width:820px){.home-photo-strip{padding:28px 0 62px}}
-      @media(max-width:720px){
-        .inspiration-track{display:block!important;width:100%!important;transform:none!important}
-        .inspiration-page{width:100%!important;display:grid!important;grid-template-columns:1fr!important;gap:16px!important;flex:0 0 auto!important}
-        .inspiration-page+.inspiration-page{margin-top:16px!important}
-      }
+      @media(max-width:720px){.inspiration-track{display:flex!important;width:max-content!important;gap:12px!important}}
     `;
     document.head.appendChild(style);
   };
 
-  const setSpriteCard = (element, sprite, column, label) => {
+  const setImageCard = (element, filename, label) => {
     element.classList.remove('is-placeholder');
-    element.innerHTML = '';
-    element.style.backgroundImage = `url("${local(sprite)}")`;
-    element.style.backgroundPosition = spritePosition[column];
-    element.style.backgroundRepeat = 'no-repeat';
-    element.style.backgroundSize = '300% 100%';
-    element.setAttribute('role', 'img');
-    element.setAttribute('aria-label', label);
+    element.removeAttribute('role');
+    element.removeAttribute('aria-label');
+    element.style.removeProperty('background-image');
+    element.innerHTML = `<img src="${local(filename)}" alt="${label}" loading="lazy" decoding="async">`;
   };
 
   const setupHomepageGallery = () => {
@@ -60,27 +43,15 @@
 
     addLiveGalleryStyles();
 
-    if (!gallery.closest('.home-photo-strip')) {
-      const section = document.createElement('section');
-      section.className = 'home-photo-strip';
-      section.setAttribute('aria-label', 'Fotografie inspirace');
-      const container = document.createElement('div');
-      container.className = 'container';
-      gallery.remove();
-      container.appendChild(gallery);
-      section.appendChild(container);
-      hero.insertAdjacentElement('afterend', section);
-    }
-
     const cards = [...gallery.querySelectorAll('.hero-gallery-card')];
-    const labels = [
-      'Slunce mezi stromy v lese',
-      'Růžové květy při západu slunce',
-      'Křišťálová koule v protisvětle'
+    const images = [
+      ['home-flowers.webp', 'Růžové květy při západu slunce'],
+      ['home-crystal.webp', 'Křišťálová koule v protisvětle'],
+      ['inspiration-02.webp', 'Strom v letní zeleni']
     ];
 
     cards.slice(0, 3).forEach((card, index) => {
-      setSpriteCard(card, 'home-sprite-hq.webp', index, labels[index]);
+      setImageCard(card, images[index][0], images[index][1]);
     });
   };
 
@@ -90,21 +61,14 @@
 
     addLiveGalleryStyles();
 
-    const labels = [
-      'Zimní krajina se sluncem',
-      'Strom v letní zeleni',
-      'Klidná hladina jezera',
-      'Výhled do zelených hor',
-      'Lesní potok',
-      'Lavička u vody při západu slunce',
-      'Květy při západu slunce',
-      'Rozkvetlé bílé květy',
-      'Zimní les se sluncem'
-    ];
-    const rowSprites = [
-      'inspiration-row-1-hq.webp',
-      'inspiration-row-2-hq.webp',
-      'inspiration-row-3-hq.webp'
+    const images = [
+      ['inspiration-01.webp', 'Zimní krajina se sluncem'],
+      ['inspiration-02.webp', 'Strom v letní zeleni'],
+      ['inspiration-03.webp', 'Klidná hladina jezera'],
+      ['inspiration-04.webp', 'Výhled do zelených hor'],
+      ['inspiration-06.webp', 'Lavička u vody při západu slunce'],
+      ['inspiration-07.webp', 'Rozkvetlé bílé květy'],
+      ['inspiration-08.webp', 'Zimní les se sluncem']
     ];
 
     const track = carousel.querySelector('.inspiration-track');
@@ -112,48 +76,96 @@
     if (!track || !controls) return;
 
     track.innerHTML = '';
-    const pageCount = 3;
+    const originals = [];
 
-    for (let pageIndex = 0; pageIndex < pageCount; pageIndex += 1) {
-      const page = document.createElement('div');
-      page.className = 'inspiration-page';
+    images.forEach(([filename, label]) => {
+      const figure = document.createElement('figure');
+      figure.className = 'inspiration-card';
+      setImageCard(figure, filename, label);
+      originals.push(figure);
+      track.appendChild(figure);
+    });
 
-      for (let column = 0; column < 3; column += 1) {
-        const absoluteIndex = pageIndex * 3 + column;
-        const figure = document.createElement('figure');
-        figure.className = 'inspiration-card';
-        setSpriteCard(figure, rowSprites[pageIndex], column, labels[absoluteIndex]);
-        page.appendChild(figure);
-      }
+    originals.forEach((figure) => {
+      const clone = figure.cloneNode(true);
+      clone.dataset.loopClone = 'true';
+      clone.setAttribute('aria-hidden', 'true');
+      track.appendChild(clone);
+    });
 
-      track.appendChild(page);
-    }
+    const arrowIcon = (direction) => `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M${direction === 'left' ? '15 18 9 12l6-6' : '9 6 6 6-6 6'}"/></svg>`;
+    controls.innerHTML = `<button class="inspiration-arrow inspiration-prev" type="button" aria-label="Předchozí fotografie">${arrowIcon('left')}</button><button class="inspiration-toggle" type="button" aria-label="Pozastavit automatické posouvání" aria-pressed="false"><span aria-hidden="true">Ⅱ</span></button><button class="inspiration-arrow inspiration-next" type="button" aria-label="Další fotografie">${arrowIcon('right')}</button>`;
 
-    controls.innerHTML = `<button class="inspiration-arrow inspiration-prev" type="button" aria-label="Předchozí tři fotografie">←</button><div class="inspiration-dots" aria-hidden="true">${Array.from({length:pageCount},(_,i)=>`<span class="inspiration-dot${i===0?' is-active':''}"></span>`).join('')}</div><button class="inspiration-arrow inspiration-next" type="button" aria-label="Další tři fotografie">→</button>`;
-
-    let currentPage = 0;
-    const dots = [...controls.querySelectorAll('.inspiration-dot')];
     const prev = controls.querySelector('.inspiration-prev');
     const next = controls.querySelector('.inspiration-next');
+    const toggle = controls.querySelector('.inspiration-toggle');
+    const viewport = carousel.querySelector('.inspiration-viewport');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let pausedByUser = reducedMotion.matches;
+    let interacting = false;
+    let previousTime = 0;
+    let frame = 0;
 
-    const render = () => {
-      track.style.transform = `translateX(-${currentPage * (100 / pageCount)}%)`;
-      dots.forEach((dot, index) => dot.classList.toggle('is-active', index === currentPage));
-      prev.disabled = currentPage === 0;
-      next.disabled = currentPage === pageCount - 1;
+    if (pausedByUser) {
+      toggle.setAttribute('aria-pressed', 'true');
+      toggle.setAttribute('aria-label', 'Spustit automatické posouvání');
+      toggle.querySelector('span').textContent = '▶';
+    }
+
+    const loopWidth = () => track.querySelector('[data-loop-clone]')?.offsetLeft - originals[0].offsetLeft || 0;
+    const cardStep = () => {
+      const style = getComputedStyle(track);
+      return originals[0].getBoundingClientRect().width + (parseFloat(style.gap) || 0);
+    };
+    const normalize = () => {
+      const width = loopWidth();
+      if (!width) return;
+      while (viewport.scrollLeft >= width) viewport.scrollLeft -= width;
+      while (viewport.scrollLeft < 0) viewport.scrollLeft += width;
+    };
+    const move = (direction) => {
+      interacting = true;
+      if (direction < 0 && viewport.scrollLeft < cardStep()) viewport.scrollLeft += loopWidth();
+      viewport.scrollBy({ left: direction * cardStep(), behavior: 'smooth' });
+      window.setTimeout(() => { normalize(); interacting = false; }, 700);
+    };
+    const tick = (time) => {
+      if (previousTime && !pausedByUser && !interacting && !document.hidden) {
+        viewport.scrollLeft += Math.min(40, time - previousTime) * 22 / 1000;
+        normalize();
+      }
+      previousTime = time;
+      frame = requestAnimationFrame(tick);
     };
 
-    prev.addEventListener('click', () => { currentPage = Math.max(0, currentPage - 1); render(); });
-    next.addEventListener('click', () => { currentPage = Math.min(pageCount - 1, currentPage + 1); render(); });
-    render();
+    prev.addEventListener('click', () => move(-1));
+    next.addEventListener('click', () => move(1));
+    toggle.addEventListener('click', () => {
+      pausedByUser = !pausedByUser;
+      toggle.setAttribute('aria-pressed', String(pausedByUser));
+      toggle.setAttribute('aria-label', pausedByUser ? 'Spustit automatické posouvání' : 'Pozastavit automatické posouvání');
+      toggle.querySelector('span').textContent = pausedByUser ? '▶' : 'Ⅱ';
+    });
+    carousel.addEventListener('mouseenter', () => { interacting = true; });
+    carousel.addEventListener('mouseleave', () => { interacting = false; });
+    carousel.addEventListener('focusin', () => { interacting = true; });
+    carousel.addEventListener('focusout', () => { interacting = false; });
+    viewport.addEventListener('pointerdown', () => { interacting = true; });
+    window.addEventListener('pointerup', () => { normalize(); interacting = false; }, { passive: true });
+    reducedMotion.addEventListener('change', (event) => {
+      if (event.matches) pausedByUser = true;
+    });
+    carousel.dataset.autoplay = 'infinite';
+    frame = requestAnimationFrame(tick);
+    window.addEventListener('pagehide', () => cancelAnimationFrame(frame), { once: true });
   };
 
-  const useHighQualityPortrait = () => {
+  const useAvailablePortrait = () => {
     document.querySelectorAll('img').forEach((img) => {
       const src = img.getAttribute('src') || '';
       const filename = src.split('?')[0].split('/').pop();
       if (filename === 'marcela-kiraly.webp' || filename === 'portrait-constellations.webp' || filename === 'portrait-constellations-v2.jpg') {
-        img.src = local('marcela-kiraly-hq.webp');
+        img.src = local('marcela-kiraly.webp');
         img.removeAttribute('srcset');
       }
     });
@@ -161,5 +173,5 @@
 
   setupHomepageGallery();
   setupInspirationGallery();
-  useHighQualityPortrait();
+  useAvailablePortrait();
 })();
