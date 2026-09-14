@@ -197,7 +197,25 @@ const menu=document.querySelector('.mobile-menu');
 const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const finePointer=window.matchMedia('(pointer:fine)').matches;
 if(header){const syncHeader=()=>header.classList.toggle('is-scrolled',window.scrollY>24);syncHeader();window.addEventListener('scroll',syncHeader,{passive:true})}
-if(toggle&&menu){const closeMenu=()=>{toggle.setAttribute('aria-expanded','false');menu.classList.remove('is-open');document.body.classList.remove('menu-open')};toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!open));menu.classList.toggle('is-open',!open);document.body.classList.toggle('menu-open',!open)});menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));window.addEventListener('resize',()=>{if(window.innerWidth>900)closeMenu()});document.addEventListener('keydown',event=>{if(event.key==='Escape')closeMenu()})}
+if(toggle&&menu){
+  const links=[...menu.querySelectorAll('a')];
+  const currentPage=(location.pathname.split('/').pop()||'index.html').split('?')[0];
+  links.forEach(link=>{if((link.getAttribute('href')||'').split('?')[0]===currentPage)link.setAttribute('aria-current','page')});
+  const setMenuState=open=>{
+    toggle.setAttribute('aria-expanded',String(open));
+    toggle.setAttribute('aria-label',open?'Zavřít menu':'Otevřít menu');
+    menu.classList.toggle('is-open',open);
+    menu.setAttribute('aria-hidden',String(!open));
+    if('inert'in menu)menu.inert=!open;
+    document.body.classList.toggle('menu-open',open);
+  };
+  const closeMenu=({restoreFocus=false}={})=>{const wasOpen=toggle.getAttribute('aria-expanded')==='true';setMenuState(false);if(wasOpen&&restoreFocus)toggle.focus()};
+  setMenuState(false);
+  toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')!=='true';setMenuState(open);if(open)requestAnimationFrame(()=>links[0]?.focus({preventScroll:true}))});
+  links.forEach(link=>link.addEventListener('click',()=>closeMenu()));
+  window.addEventListener('resize',()=>{if(window.innerWidth>900&&!(window.matchMedia('(max-height: 540px) and (pointer: coarse)').matches))closeMenu()});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape')closeMenu({restoreFocus:true})});
+}
 const reveals=document.querySelectorAll('.reveal');if(!reduceMotion&&'IntersectionObserver'in window){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}}),{threshold:.1,rootMargin:'0px 0px -24px'});reveals.forEach(el=>observer.observe(el))}else reveals.forEach(el=>el.classList.add('is-visible'));
 if(!reduceMotion&&finePointer){document.querySelectorAll('.magnetic').forEach(button=>{button.addEventListener('pointermove',event=>{const rect=button.getBoundingClientRect();button.style.setProperty('--mx',`${(event.clientX-rect.left-rect.width/2)*.14}px`);button.style.setProperty('--my',`${(event.clientY-rect.top-rect.height/2)*.18}px`)});button.addEventListener('pointerleave',()=>{button.style.setProperty('--mx','0px');button.style.setProperty('--my','0px')})})}
 if(form){form.addEventListener('submit',event=>{event.preventDefault();const status=form.querySelector('.form-status');if(status)status.textContent='Formulář je připravený. Po doplnění cílového e-mailu ho napojíme na reálné odesílání.'})}
