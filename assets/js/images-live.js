@@ -1,7 +1,7 @@
 'use strict';
 
 (() => {
-  const HQ_VERSION = '20260914hq2';
+  const HQ_VERSION = '20260915hq3';
   const local = (name) => `assets/images/${name}?v=${HQ_VERSION}`;
 
   const addLiveGalleryStyles = () => {
@@ -47,7 +47,7 @@
     const images = [
       ['home-flowers.webp', 'Růžové květy při západu slunce'],
       ['home-crystal.webp', 'Křišťálová koule v protisvětle'],
-      ['inspiration-02.webp', 'Strom v letní zeleni']
+      ['inspiration-02-hq.webp', 'Strom v letní zeleni']
     ];
 
     cards.slice(0, 3).forEach((card, index) => {
@@ -62,13 +62,13 @@
     addLiveGalleryStyles();
 
     const images = [
-      ['inspiration-01.webp', 'Zimní krajina se sluncem'],
-      ['inspiration-02.webp', 'Strom v letní zeleni'],
-      ['inspiration-03.webp', 'Klidná hladina jezera'],
-      ['inspiration-04.webp', 'Výhled do zelených hor'],
-      ['inspiration-06.webp', 'Lavička u vody při západu slunce'],
-      ['inspiration-07.webp', 'Rozkvetlé bílé květy'],
-      ['inspiration-08.webp', 'Zimní les se sluncem']
+      ['inspiration-01-hq.webp', 'Zimní krajina se sluncem'],
+      ['inspiration-02-hq.webp', 'Strom v letní zeleni'],
+      ['inspiration-03-hq.webp', 'Klidná hladina jezera'],
+      ['inspiration-04-hq.webp', 'Výhled do zelených hor'],
+      ['inspiration-06-hq.webp', 'Lavička u vody při západu slunce'],
+      ['inspiration-07-hq.webp', 'Rozkvetlé bílé květy'],
+      ['inspiration-08-hq.webp', 'Zimní les se sluncem']
     ];
 
     const track = carousel.querySelector('.inspiration-track');
