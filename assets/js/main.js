@@ -13,7 +13,7 @@ ensureStylesheet('assets/css/constellation-2026.css');
 ensureStylesheet('assets/css/centered-2026.css?v=20260909f');
 ensureStylesheet('assets/css/legal-mobile-2026.css');
 ensureStylesheet('assets/css/inspiration-gallery.css?v=20260909b');
-const uxRefreshHref='assets/css/ux-refresh-20260914.css?v=20260915e';
+const uxRefreshHref='assets/css/ux-refresh-20260914.css?v=20260915f';
 ensureStylesheet(uxRefreshHref);
 const uxRefreshLink=document.querySelector(`link[href="${uxRefreshHref}"]`);
 if(uxRefreshLink) document.head.appendChild(uxRefreshLink);
