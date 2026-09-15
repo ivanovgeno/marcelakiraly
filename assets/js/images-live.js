@@ -101,17 +101,13 @@
     const toggle = controls.querySelector('.inspiration-toggle');
     const viewport = carousel.querySelector('.inspiration-viewport');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    let pausedByUser = reducedMotion.matches;
+    let pausedByUser = false;
+    let autoSpeed = reducedMotion.matches ? 18 : 34;
     let pointerIsDown = false;
     let resumeAt = 0;
     let previousTime = 0;
+    let fractionalTravel = 0;
     let frame = 0;
-
-    if (pausedByUser) {
-      toggle.setAttribute('aria-pressed', 'true');
-      toggle.setAttribute('aria-label', 'Spustit automatické posouvání');
-      toggle.querySelector('span').textContent = '▶';
-    }
 
     const loopWidth = () => track.querySelector('[data-loop-clone]')?.offsetLeft - originals[0].offsetLeft || 0;
     const cardStep = () => {
@@ -132,8 +128,13 @@
     };
     const tick = (time) => {
       if (previousTime && !pausedByUser && !pointerIsDown && time >= resumeAt && !document.hidden) {
-        viewport.scrollLeft += Math.min(40, time - previousTime) * 34 / 1000;
-        normalize();
+        fractionalTravel += Math.min(40, time - previousTime) * autoSpeed / 1000;
+        const wholePixels = Math.floor(fractionalTravel);
+        if (wholePixels > 0) {
+          viewport.scrollLeft += wholePixels;
+          fractionalTravel -= wholePixels;
+          normalize();
+        }
       }
       previousTime = time;
       frame = requestAnimationFrame(tick);
@@ -156,7 +157,7 @@
     window.addEventListener('pointerup', releasePointer, { passive: true });
     window.addEventListener('pointercancel', releasePointer, { passive: true });
     reducedMotion.addEventListener('change', (event) => {
-      if (event.matches) pausedByUser = true;
+      autoSpeed = event.matches ? 18 : 34;
     });
     carousel.dataset.autoplay = 'infinite';
     frame = requestAnimationFrame(tick);
