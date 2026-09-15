@@ -396,6 +396,117 @@ h2 { line-height: 1.01; }
   }
 }
 
+/* Contact page — direct form entry with an original constellation artwork. */
+.contact-main-section {
+  position: relative;
+  overflow: hidden;
+  padding-top: clamp(128px, 11vw, 158px) !important;
+  background:
+    radial-gradient(circle at 92% 13%, rgba(216, 193, 218, .34), transparent 28%),
+    linear-gradient(145deg, #fffaf8 0%, #fcf5f6 58%, #f5eaf1 100%);
+}
+
+.contact-main-section::before {
+  content: '';
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  left: -310px;
+  top: 22%;
+  border: 1px solid rgba(189, 140, 74, .16);
+  border-radius: 50%;
+  box-shadow: 0 0 0 54px rgba(189, 140, 74, .025), 0 0 0 108px rgba(96, 70, 103, .018);
+  pointer-events: none;
+}
+
+.contact-premium.contact-premium-redesign {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, .72fr);
+  gap: clamp(46px, 6vw, 84px);
+  align-items: start;
+  max-width: 1160px;
+}
+
+.contact-main-copy { min-width: 0; }
+.contact-main-copy h1 {
+  max-width: 780px;
+  margin: 0;
+  font-size: clamp(3.7rem, 5.8vw, 6.35rem);
+  line-height: .94;
+  letter-spacing: -.043em;
+  color: var(--plum-deep);
+}
+.contact-main-copy .lead { max-width: 670px; margin-top: 24px; }
+.contact-main-copy .contact-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px; margin: 30px 0 18px; }
+.contact-main-copy .contact-card {
+  min-height: 92px;
+  padding: 17px 18px;
+  border: 1px solid rgba(96, 70, 103, .11);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, .58);
+}
+.contact-main-copy .form { margin-top: 16px; }
+
+.contact-art {
+  position: sticky;
+  top: 104px;
+  isolation: isolate;
+  min-height: 720px;
+  overflow: hidden;
+  border: 1px solid rgba(96, 70, 103, .12);
+  border-radius: 230px 230px 26px 26px;
+  background: linear-gradient(155deg, rgba(255,255,255,.74), rgba(235,219,232,.86) 48%, rgba(151,116,156,.74));
+  box-shadow: 0 28px 74px rgba(70, 49, 79, .14);
+}
+.contact-art::before {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  inset: 22px;
+  border: 1px solid rgba(255, 255, 255, .58);
+  border-radius: inherit;
+  pointer-events: none;
+}
+.contact-art-glow {
+  position: absolute;
+  z-index: -1;
+  width: 320px;
+  height: 320px;
+  right: -80px;
+  bottom: -72px;
+  border-radius: 50%;
+  background: rgba(120, 83, 126, .42);
+  filter: blur(56px);
+}
+.contact-art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.contact-art-orbit { fill: none; stroke: rgba(189, 140, 74, .32); stroke-width: 1; stroke-dasharray: 3 9; }
+.contact-art .orbit-b { stroke: rgba(255, 255, 255, .58); stroke-dasharray: none; }
+.contact-art-path { opacity: .72; filter: drop-shadow(0 22px 28px rgba(81, 56, 88, .14)); }
+.contact-art-orb { filter: drop-shadow(0 20px 28px rgba(70, 49, 79, .18)); }
+.contact-art-line { fill: none; stroke: url(#contactGold); stroke-width: 1.4; opacity: .82; }
+.contact-art .line-soft { opacity: .42; }
+.contact-art-nodes { filter: drop-shadow(0 3px 8px rgba(94, 62, 70, .22)); }
+.contact-art-spark { fill: none; stroke: rgba(255,255,255,.8); stroke-width: 1.2; stroke-linecap: round; }
+.contact-art-ring { position: absolute; z-index: 1; border: 1px solid rgba(255,255,255,.42); border-radius: 50%; }
+.contact-art .ring-one { width: 82px; height: 82px; top: 74px; left: 46px; }
+.contact-art .ring-two { width: 34px; height: 34px; right: 44px; bottom: 68px; border-color: rgba(189,140,74,.42); }
+
+@media (max-width: 900px) {
+  .contact-main-section { padding-top: 112px !important; }
+  .contact-premium.contact-premium-redesign { grid-template-columns: 1fr; gap: 38px; }
+  .contact-art { position: relative; top: auto; width: min(100%, 620px); min-height: 500px; margin-inline: auto; border-radius: 260px 260px 24px 24px; }
+}
+
+@media (max-width: 640px) {
+  .contact-main-section { padding-top: 98px !important; }
+  .contact-main-copy h1 { font-size: clamp(3rem, 14vw, 4.55rem); overflow-wrap: normal; }
+  .contact-main-copy .contact-cards { grid-template-columns: 1fr; gap: 9px; }
+  .contact-main-copy .contact-card { min-height: 0; padding: 15px 16px; }
+  .contact-art { min-height: 390px; border-radius: 210px 210px 20px 20px; }
+}
+
 @media (max-width: 480px) {
   :root { --mobile-header-height: 66px; }
   .site-header .brand-copy small { display: none !important; }
