@@ -93,8 +93,8 @@
       track.appendChild(clone);
     });
 
-    const arrowIcon = (direction) => `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M${direction === 'left' ? '15 18 9 12l6-6' : '9 6 6 6-6 6'}"/></svg>`;
-    controls.innerHTML = `<button class="inspiration-arrow inspiration-prev" type="button" aria-label="Předchozí fotografie">${arrowIcon('left')}</button><button class="inspiration-toggle" type="button" aria-label="Pozastavit automatické posouvání" aria-pressed="false"><span aria-hidden="true">Ⅱ</span></button><button class="inspiration-arrow inspiration-next" type="button" aria-label="Další fotografie">${arrowIcon('right')}</button>`;
+    const arrowIcon = () => '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+    controls.innerHTML = `<button class="inspiration-arrow inspiration-prev" type="button" aria-label="Předchozí fotografie">${arrowIcon()}</button><button class="inspiration-toggle" type="button" aria-label="Pozastavit automatické posouvání" aria-pressed="false"><span aria-hidden="true">Ⅱ</span></button><button class="inspiration-arrow inspiration-next" type="button" aria-label="Další fotografie">${arrowIcon()}</button>`;
 
     const prev = controls.querySelector('.inspiration-prev');
     const next = controls.querySelector('.inspiration-next');
@@ -102,7 +102,8 @@
     const viewport = carousel.querySelector('.inspiration-viewport');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let pausedByUser = reducedMotion.matches;
-    let interacting = false;
+    let pointerIsDown = false;
+    let resumeAt = 0;
     let previousTime = 0;
     let frame = 0;
 
@@ -124,14 +125,14 @@
       while (viewport.scrollLeft < 0) viewport.scrollLeft += width;
     };
     const move = (direction) => {
-      interacting = true;
+      resumeAt = performance.now() + 900;
       if (direction < 0 && viewport.scrollLeft < cardStep()) viewport.scrollLeft += loopWidth();
       viewport.scrollBy({ left: direction * cardStep(), behavior: 'smooth' });
-      window.setTimeout(() => { normalize(); interacting = false; }, 700);
+      window.setTimeout(normalize, 700);
     };
     const tick = (time) => {
-      if (previousTime && !pausedByUser && !interacting && !document.hidden) {
-        viewport.scrollLeft += Math.min(40, time - previousTime) * 22 / 1000;
+      if (previousTime && !pausedByUser && !pointerIsDown && time >= resumeAt && !document.hidden) {
+        viewport.scrollLeft += Math.min(40, time - previousTime) * 34 / 1000;
         normalize();
       }
       previousTime = time;
@@ -146,12 +147,14 @@
       toggle.setAttribute('aria-label', pausedByUser ? 'Spustit automatické posouvání' : 'Pozastavit automatické posouvání');
       toggle.querySelector('span').textContent = pausedByUser ? '▶' : 'Ⅱ';
     });
-    carousel.addEventListener('mouseenter', () => { interacting = true; });
-    carousel.addEventListener('mouseleave', () => { interacting = false; });
-    carousel.addEventListener('focusin', () => { interacting = true; });
-    carousel.addEventListener('focusout', () => { interacting = false; });
-    viewport.addEventListener('pointerdown', () => { interacting = true; });
-    window.addEventListener('pointerup', () => { normalize(); interacting = false; }, { passive: true });
+    viewport.addEventListener('pointerdown', () => { pointerIsDown = true; });
+    const releasePointer = () => {
+      normalize();
+      pointerIsDown = false;
+      resumeAt = performance.now() + 500;
+    };
+    window.addEventListener('pointerup', releasePointer, { passive: true });
+    window.addEventListener('pointercancel', releasePointer, { passive: true });
     reducedMotion.addEventListener('change', (event) => {
       if (event.matches) pausedByUser = true;
     });

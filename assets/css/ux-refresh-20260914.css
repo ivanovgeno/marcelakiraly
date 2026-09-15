@@ -190,6 +190,7 @@ h2 { line-height: 1.01; }
 .inspiration-dots { display: none; }
 .inspiration-arrow, .inspiration-toggle { width: 42px; height: 42px; }
 .inspiration-arrow svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.inspiration-prev svg { transform: rotate(180deg); }
 .inspiration-arrow:disabled { opacity: 1; cursor: pointer; }
 .inspiration-toggle { border: 0; border-radius: 50%; background: transparent; color: var(--plum); cursor: pointer; }
 .inspiration-toggle:hover { background: rgba(189,140,74,.10); }
