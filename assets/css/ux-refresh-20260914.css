@@ -122,8 +122,8 @@ body { background: var(--paper); color: var(--ink); font-size: 16px; }
 }
 .hero-gallery-card img {
   border-radius: 18px;
-  -webkit-mask-image: radial-gradient(ellipse 96% 94% at 50% 48%, #000 56%, rgba(0,0,0,.92) 67%, rgba(0,0,0,.44) 82%, transparent 100%);
-  mask-image: radial-gradient(ellipse 96% 94% at 50% 48%, #000 56%, rgba(0,0,0,.92) 67%, rgba(0,0,0,.44) 82%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom,#000 0%,#000 62%,rgba(0,0,0,.86) 72%,rgba(0,0,0,.38) 88%,transparent 100%);
+  mask-image: linear-gradient(to bottom,#000 0%,#000 62%,rgba(0,0,0,.86) 72%,rgba(0,0,0,.38) 88%,transparent 100%);
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
 }
