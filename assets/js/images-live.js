@@ -10,7 +10,7 @@
     style.id = 'live-gallery-styles';
     style.textContent = `
       .hero-gallery-card{
-        background-color:#f1e7eb!important;
+        background-color:transparent!important;
         image-rendering:auto!important;
       }
       .inspiration-track{display:flex!important;width:max-content!important;gap:16px!important;transform:none!important;transition:none!important}

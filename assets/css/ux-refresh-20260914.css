@@ -113,6 +113,22 @@ body { background: var(--paper); color: var(--ink); font-size: 16px; }
 .hero-gallery-card:nth-child(3) img { object-position: center 38% !important; }
 .hero-gallery-card:hover { transform: translateY(-4px) !important; box-shadow: 0 20px 46px rgba(70, 49, 79, .13) !important; }
 
+/* Let the hero photography dissolve naturally into the page instead of ending in hard cards. */
+.hero-gallery-card {
+  overflow: visible !important;
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.hero-gallery-card img {
+  border-radius: 18px;
+  -webkit-mask-image: radial-gradient(ellipse 96% 94% at 50% 48%, #000 56%, rgba(0,0,0,.92) 67%, rgba(0,0,0,.44) 82%, transparent 100%);
+  mask-image: radial-gradient(ellipse 96% 94% at 50% 48%, #000 56%, rgba(0,0,0,.92) 67%, rgba(0,0,0,.44) 82%, transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+.hero-gallery-card:hover { box-shadow: none !important; }
+
 .section-heading { gap: 10px !important; margin-bottom: clamp(28px, 3vw, 40px) !important; }
 .section-index { width: 36px; height: 36px; font-size: 1rem; }
 .eyebrow { margin-bottom: 12px; letter-spacing: .15em; }
@@ -232,6 +248,7 @@ h2 { line-height: 1.01; }
   .hero-proof { display: grid !important; grid-template-columns: 1fr !important; gap: 7px !important; margin-top: 27px !important; padding-top: 15px !important; }
   .hero-gallery { height: 350px; grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
   .hero-gallery-card { border-radius: 13px !important; }
+  .hero-gallery-card img { border-radius: 13px; }
   .lux-grid { grid-template-columns: 1fr; }
   .lux-card { min-height: 258px; }
   .process-item { grid-template-columns: 44px 1fr !important; gap: 13px; text-align: left !important; justify-items: stretch !important; }
