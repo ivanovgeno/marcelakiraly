@@ -1,7 +1,7 @@
 'use strict';
 
 (() => {
-  const HQ_VERSION = '20260915hq3';
+  const HQ_VERSION = '20260915hq4';
   const local = (name) => `assets/images/${name}?v=${HQ_VERSION}`;
 
   const addLiveGalleryStyles = () => {
@@ -18,7 +18,7 @@
       .inspiration-card{image-rendering:auto!important}
       .inspiration-card::before{z-index:1!important;background:linear-gradient(180deg,rgba(255,255,255,.015),rgba(64,42,73,.035))!important}
       .profile-home-visual{
-        background-image:url('${local('marcela-kiraly.webp')}')!important;
+        background-image:url('${local('marcela-kiraly-restored.webp')}')!important;
         background-size:cover!important;
         background-position:center 28%!important;
         background-repeat:no-repeat!important;
@@ -168,8 +168,8 @@
     document.querySelectorAll('img').forEach((img) => {
       const src = img.getAttribute('src') || '';
       const filename = src.split('?')[0].split('/').pop();
-      if (filename === 'marcela-kiraly.webp' || filename === 'portrait-constellations.webp' || filename === 'portrait-constellations-v2.jpg') {
-        img.src = local('marcela-kiraly.webp');
+      if (filename === 'marcela-kiraly.webp' || filename === 'marcela-kiraly-restored.webp' || filename === 'portrait-constellations.webp' || filename === 'portrait-constellations-v2.jpg') {
+        img.src = local('marcela-kiraly-restored.webp');
         img.removeAttribute('srcset');
       }
     });

@@ -87,10 +87,10 @@ const IMAGE_MAP={
   'constellation-system.webp':'constellation-system-v2.jpg',
   'constellation-space.webp':'constellation-space-v2.jpg',
   'constellation-landscape.webp':'constellation-landscape-v2.jpg',
-  'portrait-constellations.webp':'marcela-kiraly.webp',
-  'marcela-kiraly-hq.webp':'marcela-kiraly.webp',
+  'portrait-constellations.webp':'marcela-kiraly-restored.webp',
+  'marcela-kiraly-hq.webp':'marcela-kiraly-restored.webp',
   'hero-konstelace-temp.jpg':'hero-constellations-v2.jpg',
-  'marcela-temp.jpg':'marcela-kiraly.webp'
+  'marcela-temp.jpg':'marcela-kiraly-restored.webp'
 };
 document.querySelectorAll('img').forEach(img=>{
   if(img.closest('.hero-gallery')) return;
@@ -99,7 +99,7 @@ document.querySelectorAll('img').forEach(img=>{
   const filename=clean.split('/').pop();
   const target=IMAGE_MAP[filename]||filename;
   if(filename&&(src.includes('assets/images/')||IMAGE_MAP[filename])){
-    img.src=IMAGE_BASE+target+'?v=20260909f';
+    img.src=IMAGE_BASE+target+'?v=20260915hq4';
     img.addEventListener('error',()=>{if(img.dataset.imageFallback)return;img.dataset.imageFallback='true';img.src=IMAGE_BASE+'hero-constellations-v2.jpg?v=20260914'},{once:true});
   }
 });
