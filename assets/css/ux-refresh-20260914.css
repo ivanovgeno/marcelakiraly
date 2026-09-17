@@ -757,3 +757,74 @@ h2 { line-height: 1.01; }
     border-radius: 20px;
   }
 }
+
+/* Compact FAQ rhythm across the site */
+.section:has(> .container.faq) {
+  padding-block: clamp(42px, 5vw, 64px) !important;
+}
+
+.faq > .eyebrow {
+  margin-bottom: 8px !important;
+}
+
+.faq > h2 {
+  max-width: 780px;
+  margin-bottom: clamp(22px, 3vw, 32px) !important;
+  font-size: clamp(2.35rem, 4vw, 4.2rem);
+  line-height: .98;
+}
+
+.faq details {
+  margin: 0 0 8px !important;
+  padding: 0 !important;
+  border-radius: 14px !important;
+}
+
+.faq summary {
+  min-height: 0;
+  padding: 14px 50px 14px 18px !important;
+  line-height: 1.35;
+}
+
+.faq summary::after {
+  right: 18px;
+  top: 50%;
+  font-size: 1.45rem;
+  line-height: 1;
+  transform: translateY(-50%);
+}
+
+.faq details[open] summary::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.faq details p {
+  margin: -1px 0 0 !important;
+  padding: 0 50px 15px 18px !important;
+  font-size: .94rem;
+  line-height: 1.58;
+}
+
+@media (max-width: 640px) {
+  .section:has(> .container.faq) {
+    padding-block: 38px !important;
+  }
+
+  .faq > h2 {
+    margin-bottom: 20px !important;
+    font-size: clamp(2rem, 10vw, 2.8rem);
+  }
+
+  .faq summary {
+    padding: 13px 44px 13px 15px !important;
+  }
+
+  .faq summary::after {
+    right: 15px;
+  }
+
+  .faq details p {
+    padding: 0 15px 14px !important;
+    font-size: .92rem;
+  }
+}

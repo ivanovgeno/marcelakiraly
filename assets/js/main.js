@@ -16,7 +16,7 @@ ensureStylesheet('assets/css/constellation-2026.css');
 ensureStylesheet('assets/css/centered-2026.css?v=20260909f');
 ensureStylesheet('assets/css/legal-mobile-2026.css?v=20260917menu4');
 ensureStylesheet('assets/css/inspiration-gallery.css?v=20260909b');
-ensureStylesheet('assets/css/ux-refresh-20260914.css?v=20260917menu4');
+ensureStylesheet('assets/css/ux-refresh-20260914.css?v=20260917faq1');
 
 const normalizeBrandText=(value='')=>value
   .replace(/Marcela Kiraly/g,'Marcela Király')
