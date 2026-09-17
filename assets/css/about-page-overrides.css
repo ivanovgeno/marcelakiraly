@@ -6,8 +6,8 @@
 .about-hero-kicker{margin:22px 0 0;color:var(--gold);font-size:.82rem;line-height:1.4;letter-spacing:.12em;text-transform:uppercase;font-weight:600;}
 
 .about-simple{padding-top:38px;padding-bottom:124px;background:linear-gradient(180deg,#fffdfc 0%,#faf4f7 100%);}
-.about-simple-grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(300px,.82fr);gap:clamp(52px,7vw,96px);align-items:center;max-width:1080px;}
-.about-profile-column{display:grid;grid-column:2;grid-row:1;gap:18px;align-self:start;}
+.about-simple-grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(300px,.82fr);gap:clamp(52px,7vw,96px);align-items:stretch;max-width:1080px;}
+.about-profile-column{display:grid;grid-column:2;grid-row:1;gap:18px;align-self:stretch;align-content:start;}
 .about-photo-placeholder{position:relative;min-height:680px;border-radius:34px;border:1px solid rgba(111,75,121,.16);background:linear-gradient(145deg,rgba(255,255,255,.62),rgba(232,219,230,.68));box-shadow:0 24px 68px rgba(79,56,89,.08);overflow:hidden;margin:0;}
 .about-photo-placeholder::before{content:"";position:absolute;inset:15px;border:1px solid rgba(201,149,82,.25);border-radius:27px;z-index:2;pointer-events:none;}
 .about-photo-placeholder::after{content:"Fotografie Marcely";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(111,75,121,.46);white-space:nowrap;}
@@ -60,4 +60,17 @@
   .about-hero-kicker{font-size:.72rem;letter-spacing:.1em;}
   .about-statement{margin-top:36px;padding:28px 10px 0;}
   .about-statement::before{font-size:3.7rem;margin-bottom:14px;}
+}
+
+/* Desktop alignment: text spans from portrait top to certifications bottom */
+@media(min-width:821px){
+  .about-simple-copy{
+    display:flex;
+    flex-direction:column;
+    align-self:stretch;
+  }
+
+  .about-simple-copy .about-statement{
+    margin-top:auto;
+  }
 }
