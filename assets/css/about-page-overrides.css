@@ -106,19 +106,20 @@
   }
 
   .about-simple-copy .about-statement{
-    margin-top:auto;
-    padding:22px 18px 0;
+    margin-top:18px;
+    padding:18px 18px 0;
   }
 
   .about-simple-copy .about-statement::before{
-    margin-bottom:10px;
-    font-size:3.5rem;
+    margin-bottom:8px;
+    font-size:4.2rem;
   }
 
   .about-simple-copy .about-statement p{
-    margin-bottom:8px;
-    font-size:clamp(1.2rem,1.7vw,1.5rem);
-    line-height:1.4;
+    margin-bottom:9px;
+    font-size:clamp(1.38rem,2vw,1.72rem);
+    font-weight:500;
+    line-height:1.42;
   }
 
   .about-simple-copy .about-statement p:last-of-type{
