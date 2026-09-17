@@ -15,9 +15,11 @@
 .profile-pillar .profile-num{font-size:.72rem;letter-spacing:.15em;color:var(--content-gold);font-weight:700;padding-top:4px;}
 .profile-pillar strong{font-family:"Cormorant Garamond",serif;font-size:clamp(1.35rem,2vw,1.75rem);line-height:1.1;color:var(--content-plum-deep);font-weight:600;}
 .profile-pillar p{grid-column:2;margin:0;color:#655c67;line-height:1.72;font-size:.98rem;max-width:620px;}
-.profile-story{margin-top:28px;max-width:760px;}
-.profile-story p{margin:0 0 15px;color:#5e5660;line-height:1.8;font-size:1rem;}
-.profile-story p:last-child{margin-bottom:0;}
+.profile-statement{max-width:680px;margin:30px auto 0;padding:30px 24px 0;border:0;border-top:1px solid rgba(201,149,82,.34);text-align:center;position:relative;}
+.profile-statement::before{content:"“";display:block;font-family:"Cormorant Garamond",serif;font-size:4rem;line-height:.7;color:rgba(201,149,82,.45);margin:0 auto 16px;}
+.profile-statement p{font-family:"Cormorant Garamond",serif;font-size:clamp(1.35rem,2vw,1.75rem);line-height:1.45;color:var(--content-plum-deep);margin:0 auto 10px;max-width:610px;}
+.profile-statement p:last-of-type{margin-bottom:18px;}
+.profile-statement cite{display:block;color:var(--content-gold);font-style:normal;font-size:.74rem;line-height:1.2;letter-spacing:.18em;text-transform:uppercase;font-weight:700;}
 .profile-actions{margin-top:26px;}
 
 /* O mně — původní image + copy layout, pouze uhlazený */
@@ -62,5 +64,6 @@
   .profile-home .profile-pillars::before{font-size:.72rem;letter-spacing:.11em;}
   .profile-pillar{grid-template-columns:38px 1fr;gap:10px 14px;}
   .profile-pillar p{grid-column:1/-1;padding-left:52px;}
+  .profile-statement{padding-inline:8px;}
   .about-original .page-image-split,.about-story-original .page-image-split{gap:28px;}
 }

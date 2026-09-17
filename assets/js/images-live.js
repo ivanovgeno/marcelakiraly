@@ -19,8 +19,8 @@
       .inspiration-card::before{z-index:1!important;background:linear-gradient(180deg,rgba(255,255,255,.015),rgba(64,42,73,.035))!important}
       .profile-home-visual{
         background-image:url('${local('marcela-kiraly-restored.webp')}')!important;
-        background-size:cover!important;
-        background-position:center 28%!important;
+        background-size:125% auto!important;
+        background-position:100% 48%!important;
         background-repeat:no-repeat!important;
       }
       @media(max-width:720px){.inspiration-track{display:flex!important;width:max-content!important;gap:12px!important}}

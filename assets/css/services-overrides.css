@@ -18,7 +18,9 @@
 /* Image-free service cards: restrained tonal surfaces from the site's own palette. */
 .service-card-2026{
   min-height:330px;
-  justify-content:flex-end;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
   border:1px solid rgba(96,70,103,.12);
   box-shadow:0 16px 42px rgba(70,49,79,.07);
   background:
@@ -51,9 +53,9 @@
   border-color:rgba(145,101,119,.23);
 }
 .service-card-2026 .num{color:#a8733c;}
-.service-card-2026 h3{color:var(--plum-deep);font-size:clamp(1.9rem,2.7vw,2.7rem);}
-.service-card-2026 p{color:#665c68;margin:12px 0 20px;}
-.service-card-2026 .text-link{color:var(--plum);border-color:rgba(96,70,103,.28);}
+.service-card-2026 h3{color:var(--plum-deep);font-size:clamp(1.9rem,2.7vw,2.7rem);margin-inline:auto;}
+.service-card-2026 p{color:#665c68;margin:12px auto 20px;max-width:46ch;}
+.service-card-2026 .text-link{color:var(--plum);border-color:rgba(96,70,103,.28);margin-inline:auto;}
 .service-card-2026:hover{
   transform:translateY(-4px);
   border-color:rgba(189,140,74,.30);
