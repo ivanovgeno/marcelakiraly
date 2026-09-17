@@ -19,8 +19,8 @@
 .service-card-2026{
   min-height:360px;
   display:grid;
-  grid-template-rows:auto minmax(3.1em,auto) minmax(6.2em,auto) auto;
-  align-content:center;
+  grid-template-rows:26px 105px 100px auto;
+  align-content:start;
   justify-items:center;
   align-items:center;
   text-align:center;
@@ -55,7 +55,7 @@
   height:86px;
   border-color:rgba(145,101,119,.23);
 }
-.service-card-2026 .num{color:#a8733c;margin-bottom:10px;align-self:end;}
+.service-card-2026 .num{color:#a8733c;margin:0;align-self:start;}
 .service-card-2026 h3{color:var(--plum-deep);font-size:clamp(1.9rem,2.7vw,2.7rem);margin-inline:auto;align-self:start;}
 .service-card-2026 p{color:#665c68;margin:12px auto 20px;max-width:46ch;align-self:start;}
 .service-card-2026 .text-link{color:var(--plum);border-color:rgba(96,70,103,.28);margin-inline:auto;}
@@ -72,4 +72,5 @@
   .services-format-band .page-copy{text-align:left;}
   .services-format-band .page-copy h2,.services-format-band .page-copy>p:not(.eyebrow){margin-inline:0;}
   .service-card-2026,.service-card-2026:not(:has(p)){min-height:290px;}
+  .service-card-2026{grid-template-rows:auto auto auto auto;align-content:center;}
 }
