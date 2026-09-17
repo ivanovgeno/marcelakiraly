@@ -268,15 +268,18 @@ h2 { line-height: 1.01; }
 
 /* Unified phone navigation — portrait, landscape and safe-area devices. */
 @media (max-width: 900px), (max-height: 540px) and (pointer: coarse) {
-  :root { --mobile-header-height: 70px; }
+  :root { --mobile-header-height: 70px; --mobile-header-offset: calc(var(--mobile-header-height) + env(safe-area-inset-top)); }
 
+  html.menu-open,
   body.menu-open {
     overflow: hidden !important;
+    height: 100%;
     overscroll-behavior: none;
     touch-action: none;
   }
 
   .site-header {
+    padding-top: env(safe-area-inset-top);
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
   }
@@ -585,11 +588,11 @@ h2 { line-height: 1.01; }
   .mobile-menu { transition: none !important; }
 }
 
-/* Safari/WebKit: a fixed child of a backdrop-filtered fixed header can paint
-   underneath page content. Keep the panel in the header's own top layer. */
+/* Safari/WebKit: the menu is moved to <body> by JavaScript so it cannot
+   be trapped underneath the backdrop-filtered header stacking context. */
 @media (max-width: 900px), (max-height: 540px) and (pointer: coarse) {
   .site-header {
-    z-index: 2147483646 !important;
+    z-index: 1001 !important;
     isolation: isolate;
     overflow: visible !important;
   }
@@ -600,16 +603,20 @@ h2 { line-height: 1.01; }
     backdrop-filter: none !important;
   }
 
-  .mobile-menu {
-    position: absolute !important;
-    top: 100% !important;
-    right: calc(0px - env(safe-area-inset-right)) !important;
-    bottom: auto !important;
-    left: calc(0px - env(safe-area-inset-left)) !important;
-    width: auto !important;
-    height: calc(100vh - var(--mobile-header-height)) !important;
-    height: calc(100dvh - var(--mobile-header-height)) !important;
+  .menu-toggle {
+    z-index: 1002 !important;
+  }
+
+  body > .mobile-menu {
+    position: fixed !important;
+    z-index: 1000 !important;
+    top: var(--mobile-header-offset) !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: auto !important;
     min-height: 0 !important;
-    z-index: 1 !important;
+    max-height: none !important;
   }
 }
