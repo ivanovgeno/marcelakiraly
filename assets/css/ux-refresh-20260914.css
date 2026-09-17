@@ -316,6 +316,9 @@ h2 { line-height: 1.01; }
     width: 46px !important;
     height: 46px !important;
     padding: 0 !important;
+    grid-auto-flow: row !important;
+    grid-template-columns: 22px !important;
+    grid-template-rows: repeat(3, 2px) !important;
     place-content: center;
     gap: 6px;
     color: var(--plum);
@@ -338,11 +341,16 @@ h2 { line-height: 1.01; }
   }
 
   .menu-toggle[aria-expanded='true'] span:first-child {
-    transform: translateY(4px) rotate(45deg);
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .menu-toggle[aria-expanded='true'] span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(.4);
   }
 
   .menu-toggle[aria-expanded='true'] span:last-child {
-    transform: translateY(-4px) rotate(-45deg);
+    transform: translateY(-8px) rotate(-45deg);
   }
 
   .menu-toggle:focus-visible {

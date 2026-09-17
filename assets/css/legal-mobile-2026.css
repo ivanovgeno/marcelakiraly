@@ -65,7 +65,7 @@
 @media(max-width:900px){
   html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
   .section{padding:84px 0!important}.section-sm{padding:64px 0!important}
-  .desktop-nav,.header-cta{display:none!important}.menu-toggle{display:flex!important}
+  .desktop-nav,.header-cta{display:none!important}.menu-toggle{display:grid!important;grid-auto-flow:row!important;grid-template-columns:22px!important;grid-template-rows:repeat(3,2px)!important;place-content:center!important}
   .header-inner{height:78px!important}.brand-copy strong,.brand strong{font-size:1.3rem!important}.brand-mark{width:38px!important}
   .mobile-menu{top:78px!important;max-height:calc(100dvh - 78px);overflow-y:auto;padding-bottom:max(24px,env(safe-area-inset-bottom))}
   h2{font-size:clamp(2.75rem,8.5vw,4.6rem)!important}
