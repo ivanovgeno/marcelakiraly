@@ -12,14 +12,15 @@
 .about-photo-placeholder::before{content:"";position:absolute;inset:15px;border:1px solid rgba(201,149,82,.25);border-radius:27px;z-index:2;pointer-events:none;}
 .about-photo-placeholder::after{content:"Fotografie Marcely";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(111,75,121,.46);white-space:nowrap;}
 .about-photo-placeholder.has-photo::after{content:none;}
-.about-photo-placeholder.has-photo img{position:absolute;top:0;bottom:0;left:-17%;width:112%;height:100%;display:block;object-fit:cover;object-position:50% 48%;}
+.about-photo-placeholder.has-photo img{position:absolute;inset:0 auto 0 -25%;width:125%;max-width:none;height:100%;display:block;object-fit:cover;object-position:50% 47%;}
 .about-certifications{padding:20px;border:1px solid rgba(111,75,121,.12);border-radius:22px;background:linear-gradient(135deg,rgba(255,255,255,.9),rgba(239,228,238,.7));box-shadow:0 14px 38px rgba(79,56,89,.06);}
 .about-certifications h2{margin:0 0 14px;color:var(--plum-deep);font-family:var(--serif);font-size:1.45rem;font-weight:500;line-height:1.1;}
 .about-certifications-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
-.about-certification{position:relative;display:grid;align-content:space-between;min-height:105px;padding:14px;border:1px solid rgba(201,149,82,.24);border-radius:15px;background:linear-gradient(145deg,rgba(255,252,250,.96),rgba(235,221,233,.78));overflow:hidden;}
-.about-certification::after{content:"";position:absolute;width:74px;height:74px;right:-30px;bottom:-38px;border:1px solid rgba(201,149,82,.28);border-radius:50%;box-shadow:0 0 0 10px rgba(201,149,82,.035);}
-.about-certification-mark{width:29px;height:29px;display:grid;place-items:center;border:1px solid rgba(201,149,82,.5);border-radius:50%;color:var(--gold);font-family:var(--serif);font-size:.72rem;line-height:1;}
-.about-certification strong{position:relative;z-index:1;color:var(--plum);font-family:var(--serif);font-size:1rem;font-weight:500;line-height:1.2;}
+.about-certification{display:grid;grid-template-rows:auto 1fr;gap:10px;padding:8px 8px 12px;border:1px solid rgba(201,149,82,.24);border-radius:15px;background:linear-gradient(145deg,rgba(255,252,250,.96),rgba(235,221,233,.78));color:inherit;text-decoration:none;overflow:hidden;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;}
+.about-certification:hover{transform:translateY(-2px);border-color:rgba(201,149,82,.48);box-shadow:0 10px 24px rgba(79,56,89,.09);}
+.about-certification-image{display:block;aspect-ratio:1.414/1;border-radius:10px;background:#e8e0e0;overflow:hidden;}
+.about-certification-image img{width:100%;height:100%;max-width:none;display:block;object-fit:cover;object-position:center;transform:scale(1.09);}
+.about-certification strong{display:grid;align-items:start;padding-inline:3px;color:var(--plum);font-family:var(--serif);font-size:.92rem;font-weight:500;line-height:1.2;}
 .about-simple-copy{max-width:690px;}
 .about-simple-copy .about-name{display:flex;align-items:center;gap:12px;margin:0 0 24px;color:var(--gold);font-size:.76rem;line-height:1;text-transform:uppercase;letter-spacing:.20em;font-weight:700;}
 .about-simple-copy .about-name::before{content:"";width:30px;height:1px;background:currentColor;flex:0 0 auto;}
@@ -51,9 +52,10 @@
 @media(max-width:560px){
   .about-photo-placeholder{min-height:470px;border-radius:26px;}
   .about-photo-placeholder::before{inset:11px;border-radius:20px;}
-  .about-photo-placeholder.has-photo img{object-position:50% 46%;}
+  .about-photo-placeholder.has-photo img{left:-24%;width:124%;object-position:50% 46%;}
   .about-certifications{padding:17px;border-radius:19px;}
-  .about-certification{min-height:96px;}
+  .about-certification{padding:7px 7px 11px;}
+  .about-certification strong{font-size:.86rem;}
   .about-simple-copy .about-name{font-size:.7rem;letter-spacing:.16em;}
   .about-hero-kicker{font-size:.72rem;letter-spacing:.1em;}
   .about-statement{margin-top:36px;padding:28px 10px 0;}

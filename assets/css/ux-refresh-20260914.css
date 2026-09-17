@@ -465,6 +465,8 @@ h2 { line-height: 1.01; }
   border-radius: 15px;
   background: rgba(255, 255, 255, .58);
 }
+.contact-main-copy .contact-card a { color: inherit; text-decoration: none; }
+.contact-main-copy .contact-card a:hover { color: var(--gold); }
 .contact-main-copy .form { margin-top: 16px; }
 
 .contact-art {
