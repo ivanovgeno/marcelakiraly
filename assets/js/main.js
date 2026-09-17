@@ -1,7 +1,10 @@
 'use strict';
 
 const ensureStylesheet=(href)=>{
-  if(!document.querySelector(`link[href="${href}"]`)){
+  const stylesheetPath=href.split('?')[0];
+  const isLoaded=[...document.querySelectorAll('link[rel="stylesheet"]')]
+    .some(link=>(link.getAttribute('href')||'').split('?')[0]===stylesheetPath);
+  if(!isLoaded){
     const link=document.createElement('link');
     link.rel='stylesheet';
     link.href=href;
@@ -13,10 +16,7 @@ ensureStylesheet('assets/css/constellation-2026.css');
 ensureStylesheet('assets/css/centered-2026.css?v=20260909f');
 ensureStylesheet('assets/css/legal-mobile-2026.css');
 ensureStylesheet('assets/css/inspiration-gallery.css?v=20260909b');
-const uxRefreshHref='assets/css/ux-refresh-20260914.css?v=20260915f';
-ensureStylesheet(uxRefreshHref);
-const uxRefreshLink=document.querySelector(`link[href="${uxRefreshHref}"]`);
-if(uxRefreshLink) document.head.appendChild(uxRefreshLink);
+ensureStylesheet('assets/css/ux-refresh-20260914.css?v=20260917contact2');
 
 const normalizeBrandText=(value='')=>value
   .replace(/Marcela Kiraly/g,'Marcela Király')
