@@ -3,7 +3,7 @@
 /* Jemně vyladěná původní varianta */
 .profile-home{background:linear-gradient(180deg,#fbf8f6 0%,#f8f1f4 100%);}
 .profile-home-inner{display:grid;grid-template-columns:minmax(300px,.86fr) minmax(0,1.14fr);gap:clamp(42px,6vw,82px);align-items:center;}
-.profile-home-inner>div:first-child{position:relative;min-height:540px;border-radius:34px;overflow:hidden;background:linear-gradient(180deg,rgba(72,48,80,.03),rgba(72,48,80,.12)),url('../images/marcela-kiraly.webp?v=20260914') 50% 36%/cover no-repeat;box-shadow:0 26px 70px rgba(79,56,89,.10);border:1px solid rgba(201,149,82,.16);}
+.profile-home-inner>div:first-child{position:relative;min-height:540px;border-radius:34px;overflow:hidden;background:linear-gradient(180deg,rgba(72,48,80,.03),rgba(72,48,80,.12)),url('../images/marcela-kiraly-portrait-2026.webp?v=20260920portrait1') 50% 45%/cover no-repeat;box-shadow:0 26px 70px rgba(79,56,89,.10);border:1px solid rgba(201,149,82,.16);}
 .profile-home-inner>div:first-child::after{content:"";position:absolute;inset:14px;border:1px solid rgba(255,255,255,.32);border-radius:26px;pointer-events:none;}
 .profile-home-kicker,.profile-home-title{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
 .profile-home-copy{min-width:0;}

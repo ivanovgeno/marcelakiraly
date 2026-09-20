@@ -12,6 +12,9 @@
 .pricing-panel-large .price-item strong{display:block;font-size:1.15rem;line-height:1.28;color:var(--plum-deep);}
 .pricing-panel-large .price-item small{display:block;margin-top:8px;font-size:.94rem;line-height:1.4;color:#7a717c;}
 .pricing-panel-large .price-item b{font-family:var(--serif);font-size:1.62rem;line-height:1.15;font-weight:500;color:var(--plum);white-space:nowrap;text-align:right;}
+.pricing-audio-note{display:flex;align-items:center;gap:16px;padding:22px 38px;border-bottom:1px solid rgba(96,69,111,.10);background:linear-gradient(90deg,rgba(255,250,248,.96),rgba(246,237,243,.72));}
+.pricing-audio-note p{margin:0;color:#6f6470;font-size:.92rem;line-height:1.55;}
+.pricing-audio-icon{flex:0 0 38px;width:38px;height:38px;display:grid;place-items:center;border:1px solid rgba(201,149,82,.34);border-radius:50%;background:rgba(255,255,255,.72);color:var(--gold);font-family:var(--serif);font-size:1.15rem;}
 .pricing-panel-large .price-cta{padding:30px 38px;background:linear-gradient(135deg,rgba(245,235,241,.9),rgba(239,226,239,.9));}
 .pricing-panel-large .price-cta .btn{font-size:inherit;padding:0 26px;height:56px;}
 
@@ -23,12 +26,14 @@
   .pricing-main{padding-top:24px;padding-bottom:54px;}
   .pricing-panel-large .price-item{min-height:116px;padding:28px 26px;gap:18px;}
   .pricing-panel-large .price-item b{font-size:1.42rem;}
+  .pricing-audio-note{padding:20px 26px;}
   .pricing-panel-large .price-cta{padding:26px;}
 }
 @media(max-width:560px){
   .pricing-panel-large{border-radius:24px!important;}
   .pricing-panel-large .price-item{grid-template-columns:1fr;gap:14px;min-height:auto;padding:26px 22px;}
   .pricing-panel-large .price-item b{text-align:left;}
+  .pricing-audio-note{align-items:flex-start;padding:20px 22px;}
   .pricing-panel-large .price-cta{padding:22px;}
   .pricing-faq{padding-top:54px;}
 }

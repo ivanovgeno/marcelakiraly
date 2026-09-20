@@ -12,7 +12,7 @@
 .about-photo-placeholder::before{content:"";position:absolute;inset:15px;border:1px solid rgba(201,149,82,.25);border-radius:27px;z-index:2;pointer-events:none;}
 .about-photo-placeholder::after{content:"Fotografie Marcely";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(111,75,121,.46);white-space:nowrap;}
 .about-photo-placeholder.has-photo::after{content:none;}
-.about-photo-placeholder.has-photo img{position:absolute;inset:0 auto 0 -25%;width:125%;max-width:none;height:100%;display:block;object-fit:cover;object-position:50% 47%;}
+.about-photo-placeholder.has-photo img{position:absolute;inset:0;width:100%;max-width:none;height:100%;display:block;object-fit:cover;object-position:50% 47%;}
 .about-certifications{padding:20px;border:1px solid rgba(111,75,121,.12);border-radius:22px;background:linear-gradient(135deg,rgba(255,255,255,.9),rgba(239,228,238,.7));box-shadow:0 14px 38px rgba(79,56,89,.06);}
 .about-certifications h2{margin:0 0 14px;color:var(--plum-deep);font-family:var(--serif);font-size:1.45rem;font-weight:500;line-height:1.1;}
 .about-certifications-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
@@ -52,7 +52,7 @@
 @media(max-width:560px){
   .about-photo-placeholder{min-height:470px;border-radius:26px;}
   .about-photo-placeholder::before{inset:11px;border-radius:20px;}
-  .about-photo-placeholder.has-photo img{left:-24%;width:124%;object-position:50% 46%;}
+  .about-photo-placeholder.has-photo img{left:0;width:100%;object-position:50% 45%;}
   .about-certifications{padding:17px;border-radius:19px;}
   .about-certification{padding:7px 7px 11px;}
   .about-certification strong{font-size:.86rem;}

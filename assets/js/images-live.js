@@ -2,7 +2,9 @@
 
 (() => {
   const HQ_VERSION = '20260915hq4';
+  const PORTRAIT_VERSION = '20260920portrait1';
   const local = (name) => `assets/images/${name}?v=${HQ_VERSION}`;
+  const portrait = (name) => `assets/images/${name}?v=${PORTRAIT_VERSION}`;
 
   const addLiveGalleryStyles = () => {
     if (document.getElementById('live-gallery-styles')) return;
@@ -18,9 +20,9 @@
       .inspiration-card{image-rendering:auto!important}
       .inspiration-card::before{z-index:1!important;background:linear-gradient(180deg,rgba(255,255,255,.015),rgba(64,42,73,.035))!important}
       .profile-home-visual{
-        background-image:url('${local('marcela-kiraly-restored.webp')}')!important;
-        background-size:125% auto!important;
-        background-position:100% 48%!important;
+        background-image:url('${portrait('marcela-kiraly-portrait-2026.webp')}')!important;
+        background-size:cover!important;
+        background-position:50% 45%!important;
         background-repeat:no-repeat!important;
       }
       @media(max-width:720px){.inspiration-track{display:flex!important;width:max-content!important;gap:12px!important}}
