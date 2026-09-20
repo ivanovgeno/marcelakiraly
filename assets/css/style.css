@@ -27,3 +27,19 @@ h1,h2,h3,.display{font-family:var(--serif);font-weight:400;color:var(--plum);mar
 @media(max-width:900px){.site-header .brand-logo{width:152px;max-height:38px;}}
 @media(max-width:480px){.site-header .brand-logo{width:134px;max-height:34px;}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}.reveal{opacity:1;transform:none;filter:none}.cursor-aura{display:none}}
+
+/* Long legal disclaimer in every footer */
+.footer-disclaimer{
+  max-width:760px;
+  flex:0 1 760px;
+  line-height:1.55;
+  text-align:right;
+}
+
+@media (max-width:760px){
+  .footer-disclaimer{
+    max-width:none;
+    flex:none;
+    text-align:left;
+  }
+}
