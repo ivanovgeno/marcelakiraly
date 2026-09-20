@@ -39,6 +39,41 @@ h1,h2,h3,.display{font-family:var(--serif);font-weight:400;color:var(--plum);mar
   text-align:right;
 }
 
+/* Business details and service disclaimer form one compact, aligned footer block. */
+.footer-bottom.footer-bottom-aligned,
+.inner-footer-bottom.footer-bottom-aligned{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  align-items:start;
+  gap:0 32px;
+}
+
+.footer-copy-stack{
+  min-width:0;
+  display:grid;
+  gap:3px;
+  justify-items:start;
+  text-align:left;
+}
+
+.footer-copy-stack .footer-business-note,
+.footer-copy-stack .footer-disclaimer{
+  width:100%;
+  max-width:none;
+  margin:0;
+  text-align:left;
+  line-height:1.45;
+}
+
+.footer-copy-stack .footer-business-note{
+  color:#827785;
+  font-size:.66rem;
+}
+
+.footer-copy-stack .footer-disclaimer{
+  white-space:normal;
+}
+
 @media (max-width:1220px){
   .footer-bottom,
   .inner-footer-bottom{
@@ -57,5 +92,26 @@ h1,h2,h3,.display{font-family:var(--serif);font-weight:400;color:var(--plum);mar
     white-space:normal;
     font-size:.72rem;
     letter-spacing:normal;
+  }
+}
+
+@media (max-width:640px){
+  .footer-bottom.footer-bottom-aligned,
+  .inner-footer-bottom.footer-bottom-aligned{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    gap:6px!important;
+  }
+
+  .footer-copy-stack{
+    width:100%;
+    gap:3px;
+    text-align:center;
+  }
+
+  .footer-copy-stack .footer-business-note,
+  .footer-copy-stack .footer-disclaimer{
+    text-align:center;
   }
 }

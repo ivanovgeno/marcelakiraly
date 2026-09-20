@@ -175,7 +175,18 @@ if(footer&&!footer.querySelector('.footer-extras')){
   extras.className='container footer-extras';
   extras.innerHTML=`<div class="footer-social" aria-label="Sociální sítě"><span class="footer-social-label">Sledujte mě</span><a class="social-link" href="#" data-social-placeholder aria-disabled="true" aria-label="Facebook – odkaz bude doplněn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.7 22v-8.6h2.9l.43-3.35H13.7V7.91c0-.97.27-1.63 1.66-1.63h1.78V3.29c-.31-.04-1.36-.13-2.59-.13-2.56 0-4.32 1.56-4.32 4.43v2.46H7.33v3.35h2.9V22h3.47Z"/></svg></a><a class="social-link" href="#" data-social-placeholder aria-disabled="true" aria-label="Instagram – odkaz bude doplněn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 2h9.6A5.2 5.2 0 0 1 22 7.2v9.6a5.2 5.2 0 0 1-5.2 5.2H7.2A5.2 5.2 0 0 1 2 16.8V7.2A5.2 5.2 0 0 1 7.2 2Zm-.18 2A3.02 3.02 0 0 0 4 7.02v9.96A3.02 3.02 0 0 0 7.02 20h9.96A3.02 3.02 0 0 0 20 16.98V7.02A3.02 3.02 0 0 0 16.98 4H7.02Zm10.23 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg></a></div><nav class="footer-legal" aria-label="Právní informace"><a href="ochrana-osobnich-udaju.html">Ochrana osobních údajů</a><a href="cookies.html">Cookies</a><a href="marketingovy-souhlas.html">Marketingový souhlas</a><a href="obchodni-podminky.html">Obchodní podmínky</a></nav><p class="footer-business-note">Provozovatel: Marcela Király · IČO: 62355287 · Dolní 310, 744 01 Frenštát pod Radhoštěm · <a href="mailto:marcelina4988@seznam.cz">marcelina4988@seznam.cz</a> · <a href="tel:+420739506856">+420 739 506 856</a></p>`;
   const bottom=footer.querySelector('.inner-footer-bottom,.footer-bottom');
-  if(bottom) footer.insertBefore(extras,bottom); else footer.appendChild(extras);
+  if(bottom){
+    footer.insertBefore(extras,bottom);
+    const businessNote=extras.querySelector('.footer-business-note');
+    const disclaimer=bottom.querySelector('.footer-disclaimer');
+    if(businessNote&&disclaimer){
+      const copyStack=document.createElement('div');
+      copyStack.className='footer-copy-stack';
+      disclaimer.replaceWith(copyStack);
+      copyStack.append(businessNote,disclaimer);
+      bottom.classList.add('footer-bottom-aligned');
+    }
+  }else footer.appendChild(extras);
 }
 document.querySelectorAll('[data-social-placeholder]').forEach(link=>link.addEventListener('click',event=>event.preventDefault()));
 
