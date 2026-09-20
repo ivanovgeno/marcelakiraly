@@ -30,16 +30,32 @@ h1,h2,h3,.display{font-family:var(--serif);font-weight:400;color:var(--plum);mar
 
 /* Long legal disclaimer in every footer */
 .footer-disclaimer{
-  max-width:760px;
-  flex:0 1 760px;
-  line-height:1.55;
+  max-width:none;
+  flex:0 0 auto;
+  white-space:nowrap;
+  font-size:.66rem;
+  line-height:1.45;
+  letter-spacing:-.01em;
   text-align:right;
 }
 
-@media (max-width:760px){
+@media (max-width:1220px){
+  .footer-bottom,
+  .inner-footer-bottom{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
   .footer-disclaimer{
-    max-width:none;
-    flex:none;
+    width:100%;
     text-align:left;
+  }
+}
+
+@media (max-width:900px){
+  .footer-disclaimer{
+    white-space:normal;
+    font-size:.72rem;
+    letter-spacing:normal;
   }
 }
