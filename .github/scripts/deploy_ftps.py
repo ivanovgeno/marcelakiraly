@@ -7,6 +7,18 @@ import ssl
 import subprocess
 
 
+class SessionReuseFTP_TLS(ftplib.FTP_TLS):
+    """Reuse the verified control-channel TLS session for FTP data sockets."""
+
+    def ntransfercmd(self, cmd, rest=None):
+        conn, size = ftplib.FTP.ntransfercmd(self, cmd, rest)
+        if self._prot_p:
+            conn = self.context.wrap_socket(
+                conn, server_hostname=self.host, session=self.sock.session
+            )
+        return conn, size
+
+
 required = ("FTP_HOST", "FTP_USER", "FTP_PASSWORD", "FTP_REMOTE_DIR")
 missing = [name for name in required if not os.environ.get(name, "").strip()]
 if missing:
@@ -39,7 +51,7 @@ if not files or Path("index.html") not in files:
 files.sort(key=lambda path: (path.suffix == ".html", path.name == "index.html", str(path)))
 context = ssl.create_default_context()
 context.minimum_version = ssl.TLSVersion.TLSv1_2
-ftp = ftplib.FTP_TLS(context=context, timeout=45)
+ftp = SessionReuseFTP_TLS(context=context, timeout=45)
 ftp.connect(host, 21)
 ftp.auth()
 ftp.login(os.environ["FTP_USER"], os.environ["FTP_PASSWORD"])
@@ -59,12 +71,15 @@ except ftplib.error_perm:
             continue
         print(f"  {candidate}: available")
         if candidate.endswith("domains"):
-            matches = [
-                name.rsplit("/", 1)[-1]
-                for name in ftp.nlst()
-                if "marcela" in name.lower() or "konstelace" in name.lower()
-            ]
-            print("  Possible matching domain folders: " + (", ".join(matches) or "none"))
+            try:
+                matches = [
+                    name.rsplit("/", 1)[-1]
+                    for name in ftp.nlst()
+                    if "marcela" in name.lower() or "konstelace" in name.lower()
+                ]
+                print("  Possible matching domain folders: " + (", ".join(matches) or "none"))
+            except ftplib.Error as exc:
+                print(f"  Listing this directory failed: {type(exc).__name__}")
     ftp.quit()
     raise SystemExit("No files uploaded; set FTP_REMOTE_DIR to the web's exact document directory.")
 base_dir = ftp.pwd()
