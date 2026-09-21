@@ -16,4 +16,4 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://ivanovgeno.github.io/marcelakiraly/sitemap.xml
+Sitemap: https://konstelacesmarcelou.cz/sitemap.xml
