@@ -1,6 +1,7 @@
 """Publish only website files using explicit FTP over verified TLS."""
 
 import ftplib
+import hashlib
 import os
 from pathlib import Path
 import ssl
@@ -19,17 +20,19 @@ class SessionReuseFTP_TLS(ftplib.FTP_TLS):
         return conn, size
 
 
-required = ("FTP_HOST", "FTP_USER", "FTP_PASSWORD", "FTP_REMOTE_DIR")
+required = ("FTP_HOST", "FTP_USER", "FTP_PASSWORD")
 missing = [name for name in required if not os.environ.get(name, "").strip()]
 if missing:
     raise SystemExit("Missing GitHub Actions secrets: " + ", ".join(missing))
 
 host = os.environ["FTP_HOST"].strip()
-remote_dir = os.environ["FTP_REMOTE_DIR"].strip()
 if "://" in host or "/" in host or ":" in host:
     raise SystemExit("FTP_HOST must be a hostname without a protocol, path or port")
-if remote_dir in (".", "..") or ".." in Path(remote_dir).parts:
-    raise SystemExit("FTP_REMOTE_DIR must specify the website directory")
+
+# The FTP account is already rooted inside /www. This folder is dedicated to
+# the domain named by the owner; never upload into the shared /domains parent.
+domain_directory = "konstelacesmarcelou.cz"
+domains_parent = "/domains"
 
 tracked = subprocess.check_output(["git", "ls-files", "-z"]).split(b"\0")
 files = []
@@ -57,31 +60,15 @@ ftp.auth()
 ftp.login(os.environ["FTP_USER"], os.environ["FTP_PASSWORD"])
 ftp.prot_p()
 try:
-    ftp.cwd(remote_dir)
+    ftp.cwd(domains_parent)
 except ftplib.error_perm:
-    login_dir = ftp.pwd()
-    print("Configured FTP_REMOTE_DIR is not accessible from the FTP login directory.")
-    print("Checking whether the proposed /www/domains path is accessible:")
-    for candidate in ("/www/domains", "www/domains", "/domains", "domains"):
-        ftp.cwd(login_dir)
-        try:
-            ftp.cwd(candidate)
-        except ftplib.error_perm:
-            print(f"  {candidate}: unavailable")
-            continue
-        print(f"  {candidate}: available")
-        if candidate.endswith("domains"):
-            try:
-                matches = [
-                    name.rsplit("/", 1)[-1]
-                    for name in ftp.nlst()
-                    if "marcela" in name.lower() or "konstelace" in name.lower()
-                ]
-                print("  Possible matching domain folders: " + (", ".join(matches) or "none"))
-            except ftplib.Error as exc:
-                print(f"  Listing this directory failed: {type(exc).__name__}")
     ftp.quit()
-    raise SystemExit("No files uploaded; set FTP_REMOTE_DIR to the web's exact document directory.")
+    raise SystemExit("The FTP account cannot access /domains; no files uploaded.")
+try:
+    ftp.cwd(domain_directory)
+except ftplib.error_perm:
+    ftp.mkd(domain_directory)
+    ftp.cwd(domain_directory)
 base_dir = ftp.pwd()
 
 uploaded = 0
@@ -98,10 +85,16 @@ try:
             ftp.storbinary(f"STOR {file.name}", source)
         uploaded += 1
         print(f"Uploaded {file}")
+    ftp.cwd(base_dir)
+    downloaded = bytearray()
+    ftp.retrbinary("RETR index.html", downloaded.extend)
+    expected = hashlib.sha256(Path("index.html").read_bytes()).digest()
+    if hashlib.sha256(downloaded).digest() != expected:
+        raise SystemExit("The uploaded index.html did not match the repository file")
 finally:
     try:
         ftp.quit()
     except (OSError, ftplib.Error):
         ftp.close()
 
-print(f"Uploaded {uploaded} website files to the configured directory.")
+print(f"Uploaded {uploaded} website files to /domains/{domain_directory}; index.html verified.")
