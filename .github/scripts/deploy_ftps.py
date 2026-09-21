@@ -44,7 +44,29 @@ ftp.connect(host, 21)
 ftp.auth()
 ftp.login(os.environ["FTP_USER"], os.environ["FTP_PASSWORD"])
 ftp.prot_p()
-ftp.cwd(remote_dir)
+try:
+    ftp.cwd(remote_dir)
+except ftplib.error_perm:
+    login_dir = ftp.pwd()
+    print("Configured FTP_REMOTE_DIR is not accessible from the FTP login directory.")
+    print("Checking whether the proposed /www/domains path is accessible:")
+    for candidate in ("/www/domains", "www/domains", "/domains", "domains"):
+        ftp.cwd(login_dir)
+        try:
+            ftp.cwd(candidate)
+        except ftplib.error_perm:
+            print(f"  {candidate}: unavailable")
+            continue
+        print(f"  {candidate}: available")
+        if candidate.endswith("domains"):
+            matches = [
+                name.rsplit("/", 1)[-1]
+                for name in ftp.nlst()
+                if "marcela" in name.lower() or "konstelace" in name.lower()
+            ]
+            print("  Possible matching domain folders: " + (", ".join(matches) or "none"))
+    ftp.quit()
+    raise SystemExit("No files uploaded; set FTP_REMOTE_DIR to the web's exact document directory.")
 base_dir = ftp.pwd()
 
 uploaded = 0
