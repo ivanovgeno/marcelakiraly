@@ -40,7 +40,7 @@ for raw in tracked:
     if not raw:
         continue
     relative = Path(os.fsdecode(raw))
-    if (len(relative.parts) == 1 and relative.suffix in (".html", ".txt", ".xml")) or (
+    if (len(relative.parts) == 1 and (relative.suffix in (".html", ".txt", ".xml") or relative.name == "contact-submit.php")) or (
         relative.parts[0] == "assets" and len(relative.parts) > 1
     ):
         if relative.is_symlink() or not relative.is_file():

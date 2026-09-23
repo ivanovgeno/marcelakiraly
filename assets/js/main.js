@@ -280,4 +280,28 @@ if(toggle&&menu){
 }
 const reveals=document.querySelectorAll('.reveal');if(!reduceMotion&&'IntersectionObserver'in window){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}}),{threshold:.1,rootMargin:'0px 0px -24px'});reveals.forEach(el=>observer.observe(el))}else reveals.forEach(el=>el.classList.add('is-visible'));
 if(!reduceMotion&&finePointer){document.querySelectorAll('.magnetic').forEach(button=>{button.addEventListener('pointermove',event=>{const rect=button.getBoundingClientRect();button.style.setProperty('--mx',`${(event.clientX-rect.left-rect.width/2)*.14}px`);button.style.setProperty('--my',`${(event.clientY-rect.top-rect.height/2)*.18}px`)});button.addEventListener('pointerleave',()=>{button.style.setProperty('--mx','0px');button.style.setProperty('--my','0px')})})}
-if(form){form.addEventListener('submit',event=>{event.preventDefault();const status=form.querySelector('.form-status');if(status)status.textContent='Formulář je připravený. Po doplnění cílového e-mailu ho napojíme na reálné odesílání.'})}
+if(form){
+  form.addEventListener('submit',async event=>{
+    event.preventDefault();
+    const status=form.querySelector('.form-status');
+    const submit=form.querySelector('button[type="submit"]');
+    if(!form.reportValidity()||!submit||submit.disabled)return;
+    status.textContent='Odesílám zprávu…';
+    submit.disabled=true;
+    form.setAttribute('aria-busy','true');
+    try{
+      const response=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'},credentials:'same-origin'});
+      const result=await response.json().catch(()=>null);
+      if(!response.ok)throw new Error(result?.message||'Zprávu se nepodařilo odeslat.');
+      status.textContent=result?.message||'Děkuji, vaše zpráva byla odeslána.';
+      form.reset();
+    }catch(error){
+      status.textContent=error instanceof Error && error.message!=='Failed to fetch'
+        ?error.message
+        :'Zprávu se nepodařilo odeslat. Napište prosím přímo na mk@konstelacesmarcelou.cz.';
+    }finally{
+      submit.disabled=false;
+      form.removeAttribute('aria-busy');
+    }
+  });
+}
