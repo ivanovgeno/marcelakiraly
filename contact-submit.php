@@ -17,14 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     respond(405, 'Tento způsob odeslání není podporován.');
 }
 
-$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
-if ($origin !== '' && !in_array($origin, [
-    'https://konstelacesmarcelou.cz',
-    'https://www.konstelacesmarcelou.cz',
-], true)) {
-    respond(403, 'Zprávu se nepodařilo odeslat.');
-}
-
 if (isset($_SERVER['CONTENT_LENGTH']) && (int) $_SERVER['CONTENT_LENGTH'] > 12000) {
     respond(413, 'Zpráva je příliš dlouhá.');
 }

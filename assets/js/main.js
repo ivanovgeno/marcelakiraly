@@ -292,7 +292,8 @@ if(form){
     try{
       const response=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'},credentials:'same-origin'});
       const result=await response.json().catch(()=>null);
-      if(!response.ok)throw new Error(result?.message||'Zprávu se nepodařilo odeslat.');
+      if(!response.ok)throw new Error(result?.message||`Server vrátil chybu HTTP ${response.status}. Napište prosím přímo na mk@konstelacesmarcelou.cz.`);
+      if(!result)throw new Error('Server nevrátil potvrzení odeslání. Napište prosím přímo na mk@konstelacesmarcelou.cz.');
       status.textContent=result?.message||'Děkuji, vaše zpráva byla odeslána.';
       form.reset();
     }catch(error){
