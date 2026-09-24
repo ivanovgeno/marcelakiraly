@@ -29,11 +29,6 @@ if (isset($_SERVER['CONTENT_LENGTH']) && (int) $_SERVER['CONTENT_LENGTH'] > 1200
     respond(413, 'Zpráva je příliš dlouhá.');
 }
 
-// Hidden field: ordinary visitors leave it empty.
-if (!empty($_POST['website'])) {
-    respond(400, 'Zprávu se nepodařilo odeslat.');
-}
-
 $name = trim((string) ($_POST['name'] ?? ''));
 $email = trim((string) ($_POST['email'] ?? ''));
 $message = trim((string) ($_POST['message'] ?? ''));
