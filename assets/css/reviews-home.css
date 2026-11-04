@@ -45,12 +45,11 @@
 }
 
 .review-card blockquote {
-  max-width: 31ch;
   margin: clamp(20px, 2.6vw, 30px) 0;
   color: var(--plum-deep);
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(1.5rem, 2.45vw, 2.15rem);
-  line-height: 1.27;
+  font-size: clamp(1.5rem, 2vw, 1.9rem);
+  line-height: 1.32;
   font-weight: 500;
 }
 
@@ -83,5 +82,4 @@
   .review-card { border-radius: 18px; }
   .review-card-top,
   .review-card-bottom { align-items: flex-start; flex-direction: column; }
-  .review-card blockquote { max-width: none; }
 }
