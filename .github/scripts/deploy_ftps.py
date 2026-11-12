@@ -2,10 +2,13 @@
 
 import ftplib
 import hashlib
+import io
 import os
 from pathlib import Path
 import ssl
 import subprocess
+
+from canonical_routing import with_canonical_rules
 
 
 class SessionReuseFTP_TLS(ftplib.FTP_TLS):
@@ -91,6 +94,33 @@ try:
     expected = hashlib.sha256(Path("index.html").read_bytes()).digest()
     if hashlib.sha256(downloaded).digest() != expected:
         raise SystemExit("The uploaded index.html did not match the repository file")
+
+    # The WEDOS /www/.htaccess routes requests into /www/domains. A rule inside
+    # the domain directory cannot canonicalize every entry URL. Preserve the
+    # shared routing file and change only our marked, host-scoped block.
+    ftp.cwd("/")
+    original = bytearray()
+    ftp.retrbinary("RETR .htaccess", original.extend)
+    try:
+        updated = with_canonical_rules(original.decode("utf-8")).encode("utf-8")
+    except UnicodeError as error:
+        raise SystemExit("The root .htaccess is not UTF-8; no routing change made") from error
+    if updated != original:
+        temporary = ".htaccess.marcela-upload"
+        try:
+            ftp.storbinary(f"STOR {temporary}", io.BytesIO(updated))
+            ftp.rename(temporary, ".htaccess")
+        except ftplib.all_errors:
+            try:
+                ftp.delete(temporary)
+            except ftplib.all_errors:
+                pass
+            raise
+    verified = bytearray()
+    ftp.retrbinary("RETR .htaccess", verified.extend)
+    if verified != updated:
+        raise SystemExit("The root .htaccess did not match the canonical routing rules")
+    print("Canonical routing rules verified in the shared root .htaccess")
 finally:
     try:
         ftp.quit()
